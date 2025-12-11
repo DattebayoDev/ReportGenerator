@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.UrlRequest;
 import com.example.demo.repository.UrlRepository;
+import com.example.demo.service.urlDetector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +15,17 @@ import java.util.List;
 public class UrlController {
 
     @Autowired
+    private urlDetector urlDetector;
+
+    @Autowired
     private UrlRepository urlRepository;
 
     @PostMapping("/analyze")
     public String postUrl(@RequestBody UrlRequest url) {
-        UrlRequest x = url;
         urlRepository.save(url);
-        return url.getUrl();
+        return urlDetector.detectPlatform(url.getUrl());
     }
+
 
     @GetMapping("/analyze")
     public List<UrlRequest> getUrl() {
