@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.YoutubeData;
 import com.example.demo.entity.UrlRequest;
+import com.example.demo.repository.ReportRepository;
 import com.example.demo.repository.UrlRepository;
 import com.example.demo.service.RedditService;
 import com.example.demo.service.ReportGenerator;
@@ -26,6 +27,9 @@ public class UrlController {
     private UrlRepository urlRepository;
 
     @Autowired
+    private ReportRepository reportRepository;
+
+    @Autowired
     private YoutubeService youtubeService;
 
     @Autowired
@@ -36,6 +40,7 @@ public class UrlController {
 
     @PostMapping("/analyze")
     public String postUrl(@RequestBody UrlRequest url) {
+
         urlRepository.save(url);
         String website = url.getUrl();
         if (Objects.equals(urlDetector.detectPlatform(website), "YOUTUBE")) {

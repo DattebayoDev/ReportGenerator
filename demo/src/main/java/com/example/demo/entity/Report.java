@@ -1,26 +1,25 @@
 package com.example.demo.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
-public class UrlRequest {
+public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
+    private Long id;
 
-    String url;
-
-    public String getUrl(){
-        return url;
-    }
-
+    private String url;
+    private String platform;
+    private String summary;
+    private LocalDateTime timestamp;
 
 }
