@@ -20,5 +20,18 @@ public class YoutubeData {
         this.duration = duration;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getChannel(){
+        return this.channel;
+    }
+
+    public String getDuration(){
+        return this.duration;
+    }
+
+
 }
 
