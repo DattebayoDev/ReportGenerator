@@ -4,6 +4,7 @@ import com.example.demo.dto.YoutubeData;
 import com.example.demo.entity.UrlRequest;
 import com.example.demo.repository.UrlRepository;
 import com.example.demo.service.RedditService;
+import com.example.demo.service.ReportGenerator;
 import com.example.demo.service.UrlDetector;
 import com.example.demo.service.YoutubeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,17 @@ public class UrlController {
     @Autowired
     private RedditService redditService;
 
+    @Autowired
+    private ReportGenerator reportGenerator;
+
     @PostMapping("/analyze")
-    public Object postUrl(@RequestBody UrlRequest url) {
+    public String postUrl(@RequestBody UrlRequest url) {
         urlRepository.save(url);
         String website = url.getUrl();
         if (Objects.equals(urlDetector.detectPlatform(website), "YOUTUBE")) {
-           return youtubeService.getData();
+           return reportGenerator.generateYoutubeReport(youtubeService.getData());
         } else if (Objects.equals(urlDetector.detectPlatform(website), "REDDIT")) {
-            return redditService.getData();
+            return reportGenerator.generateRedditReport(redditService.getData());
         }
         return "UNKNOWN";
     }
