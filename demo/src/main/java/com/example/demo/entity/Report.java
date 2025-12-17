@@ -6,11 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
-@AllArgsConstructor
+@Getter
 public class Report {
 
     @Id
@@ -22,4 +23,21 @@ public class Report {
     private String summary;
     private LocalDateTime timestamp;
 
+    public Report(){};
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

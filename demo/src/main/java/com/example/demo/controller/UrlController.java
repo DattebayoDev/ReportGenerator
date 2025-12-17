@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.YoutubeData;
+import com.example.demo.entity.Report;
 import com.example.demo.entity.UrlRequest;
 import com.example.demo.repository.ReportRepository;
 import com.example.demo.repository.UrlRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,16 +41,29 @@ public class UrlController {
     private ReportGenerator reportGenerator;
 
     @PostMapping("/analyze")
-    public String postUrl(@RequestBody UrlRequest url) {
-
-        urlRepository.save(url);
-        String website = url.getUrl();
-        if (Objects.equals(urlDetector.detectPlatform(website), "YOUTUBE")) {
-           return reportGenerator.generateYoutubeReport(youtubeService.getData());
-        } else if (Objects.equals(urlDetector.detectPlatform(website), "REDDIT")) {
-            return reportGenerator.generateRedditReport(redditService.getData());
+    public Report postUrl(@RequestBody UrlRequest urlRequest) {
+        if (reportRepository.findByUrl(urlRequest.getUrl()) != null) {
+            Report report = reportRepository.getByUrl(urlRequest.getUrl());
+            return reportRepository.getByUrl(urlRequest.getUrl());
         }
-        return "UNKNOWN";
+
+        Report report = new Report();
+        String website = urlRequest.getUrl();
+        if (Objects.equals(urlDetector.detectPlatform(website), "YOUTUBE")) {
+            report.setUrl(website);
+            report.setPlatform(website);
+            report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData()));
+            report.setTimestamp(LocalDateTime.now());
+            reportRepository.save(report);
+        } else if (Objects.equals(urlDetector.detectPlatform(website), "REDDIT")) {
+            report.setUrl(website);
+            report.setPlatform(website);
+            report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData()));
+            report.setTimestamp(LocalDateTime.now());
+            reportRepository.save(report);
+        }
+
+        return report;
     }
 
 
