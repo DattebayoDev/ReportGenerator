@@ -5,10 +5,7 @@ import com.example.demo.entity.Report;
 import com.example.demo.entity.UrlRequest;
 import com.example.demo.repository.ReportRepository;
 import com.example.demo.repository.UrlRepository;
-import com.example.demo.service.RedditService;
-import com.example.demo.service.ReportGenerator;
-import com.example.demo.service.UrlDetector;
-import com.example.demo.service.YoutubeService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +35,9 @@ public class UrlController {
     private RedditService redditService;
 
     @Autowired
+    private UrlParser urlParser;
+
+    @Autowired
     private ReportGenerator reportGenerator;
 
     @PostMapping("/analyze")
@@ -46,6 +46,8 @@ public class UrlController {
             Report report = reportRepository.getByUrl(urlRequest.getUrl());
             return reportRepository.getByUrl(urlRequest.getUrl());
         }
+
+
 
         Report report = new Report();
         String website = urlRequest.getUrl();
