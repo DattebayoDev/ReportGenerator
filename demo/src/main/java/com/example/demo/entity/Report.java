@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -18,7 +17,7 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String url;
+    private String postId;
     private String platform;
     private String summary;
     private LocalDateTime timestamp;
@@ -33,8 +32,8 @@ public class Report {
         this.summary = summary;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public void setTimestamp(LocalDateTime timestamp) {
