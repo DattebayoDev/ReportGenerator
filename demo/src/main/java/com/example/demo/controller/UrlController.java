@@ -42,23 +42,28 @@ public class UrlController {
 
     @PostMapping("/analyze")
     public Report postUrl(@RequestBody UrlRequest urlRequest) {
-        if (reportRepository.findByUrl(urlRequest.getUrl()) != null) {
-            Report report = reportRepository.getByUrl(urlRequest.getUrl());
-            return reportRepository.getByUrl(urlRequest.getUrl());
+        String url;
+        if (Objects.equals(urlDetector.detectPlatform(urlRequest.getUrl()), "YOUTUBE")) {
+            url = urlParser.parseYoutubeUrl(urlRequest.getUrl());
+        } else {
+            url = urlParser.parseRedditUrl(urlRequest.getUrl());
         }
 
-
+        if (reportRepository.findByUrl(url) != null) {
+            Report report = reportRepository.getByUrl(url);
+            return reportRepository.getByUrl(url);
+        }
 
         Report report = new Report();
         String website = urlRequest.getUrl();
         if (Objects.equals(urlDetector.detectPlatform(website), "YOUTUBE")) {
-            report.setUrl(website);
+            report.setUrl(url);
             report.setPlatform(website);
             report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData()));
             report.setTimestamp(LocalDateTime.now());
             reportRepository.save(report);
         } else if (Objects.equals(urlDetector.detectPlatform(website), "REDDIT")) {
-            report.setUrl(website);
+            report.setUrl(url);
             report.setPlatform(website);
             report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData()));
             report.setTimestamp(LocalDateTime.now());
