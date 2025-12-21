@@ -68,7 +68,7 @@ public class UrlController {
     }
 
     @GetMapping("/reports")
-    public List<Report> getReports() {
+    public List<Report> getAllReports() {
         return reportRepository.findAll();
     }
 
@@ -83,6 +83,12 @@ public class UrlController {
         if (report != null) {
             reportRepository.deleteById(report.getId());
         }
+    }
+
+    @GetMapping("/reports/platform")
+    public List<Report> getReports(@RequestParam("website") String website) {
+        String convertedPlatform = website.toUpperCase();
+        return reportRepository.findAllByPlatform(convertedPlatform);
     }
 
 
