@@ -1,0 +1,3 @@
+spring.application.name=Report Generator
+
+youtube.api=YOUR_API_KEY_HERE
