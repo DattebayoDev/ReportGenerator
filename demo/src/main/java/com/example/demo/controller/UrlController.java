@@ -54,7 +54,7 @@ public class UrlController {
         if (Objects.equals(platform, "YOUTUBE")) {
             report.setPostId(postId);
             report.setPlatform(platform);
-            report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData()));
+            report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData(postId)));
             report.setTimestamp(LocalDateTime.now());
             reportRepository.save(report);
         } else if (Objects.equals(platform, "REDDIT")) {

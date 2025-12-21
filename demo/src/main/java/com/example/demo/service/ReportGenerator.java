@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 public class ReportGenerator {
 
     public String generateYoutubeReport (YoutubeData data) {
-        return "This video is about how to grow 10 feet tall in 24 hours" + data.getChannel();
+        return String.format("Video: %s | Channel: %s | Duration: %s",
+            data.getTitle(),
+            data.getChannel(),
+            data.getDuration());
     }
 
     public String generateRedditReport (RedditData data) {
