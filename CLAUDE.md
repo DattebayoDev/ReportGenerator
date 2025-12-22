@@ -118,6 +118,25 @@ API that accepts Reddit/YouTube links and generates concise reports based on con
 * Database now stores extracted IDs instead of full URLs
 * Deduplication working: same video with different URL formats = one cached report
 
+**Wednesday Dec 17: REST Endpoints**
+* (Skipped - moved to transcript work)
+
+**Thursday Dec 18: YouTube API Integration**
+* Got YouTube Data API v3 key
+* Integrated real YouTube metadata fetching
+* YoutubeService now calls live API instead of returning mock data
+
+**Friday Dec 19: Transcript Database Design (IN PROGRESS)**
+* Entity: `Transcript` with fields: id, videoId, transcriptText, report (one-to-one relationship)
+* Repository: `TranscriptRepository` with `findByVideoId(String videoId)` method
+* DTO: `TranscriptData` for transferring transcript data
+* Architectural decisions:
+    - Separated transcript storage from Report entity (transcripts can be large)
+    - One-to-one relationship between Report and Transcript using @JoinColumn
+    - Decoupled YoutubeService into getMetadata() and getTranscript() methods
+    - Prevents unnecessary API calls by allowing independent fetching
+* Next: Implement getTranscript() method to fetch actual YouTube transcripts
+
 ---
 
 ## Current Code Structure
@@ -128,15 +147,18 @@ src/main/java/com/example/demo/
 │   └── UrlController.java          # POST /analyze, GET /analyze
 ├── dto/
 │   ├── YoutubeData.java            # title, channel, duration
-│   └── RedditData.java             # title, description, upvote
+│   ├── RedditData.java             # title, description, upvote
+│   └── TranscriptData.java         # videoId, transcript
 ├── entity/
-│   └── Report.java                 # id, url, platform, summary, timestamp
+│   ├── Report.java                 # id, postId, platform, summary, timestamp
+│   └── Transcript.java             # id, videoId, transcriptText, report (1:1)
 ├── repository/
-│   └── ReportRepository.java       # findByUrl(String url)
+│   ├── ReportRepository.java       # findByUrl(String url)
+│   └── TranscriptRepository.java   # findByVideoId(String videoId)
 ├── service/
 │   ├── UrlDetector.java            # detectPlatform(String url)
 │   ├── UrlParser.java              # parseYoutubeUrl(), parseRedditUrl()
-│   ├── YoutubeService.java         # getData() - returns mock data
+│   ├── YoutubeService.java         # getMetadata() - fetches real YouTube data via API
 │   ├── RedditService.java          # getData() - returns mock data
 │   └── ReportGenerator.java        # generateYoutubeReport(), generateRedditReport()
 ```
