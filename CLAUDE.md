@@ -165,44 +165,6 @@ src/main/java/com/example/demo/
 
 ---
 
-## Week Plan: Dec 15-21, 2025
-
-**✅ Sunday Dec 14 (DONE):**
-- Reddit mock service
-- ReportGenerator service
-- Controller returns reports
-
-**✅ Monday Dec 15 (DONE):**
-- Report entity with caching
-- Check database before generating
-- Save new reports
-
-**✅ Tuesday Dec 16 (DONE):**
-- URL parsing for YouTube (both formats)
-- URL parsing for Reddit
-- Store normalized IDs
-
-**Wednesday Dec 17:**
-- Add REST endpoints: GET /reports, GET /reports/{id}, DELETE /reports/{id}
-- Add filtering: GET /reports?platform=YOUTUBE
-
-**Thursday Dec 18:**
-- Get YouTube API key
-- Build YouTubeApiClient that fetches real metadata
-- Replace mock YouTube service with real API calls
-
-**Friday Dec 19:**
-- Fetch YouTube transcripts (use library or HTTP client)
-- Store transcripts in database
-- Handle videos without captions
-
-**Saturday Dec 20:**
-- Build keyword-based sentiment analyzer (no AI)
-- Score transcripts: positive words vs negative words
-- Add sentiment to generated reports
-
----
-
 ## Key Patterns & Decisions Made
 
 1. **Three-layer architecture:** Controller → Service → Repository
