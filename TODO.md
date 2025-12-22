@@ -12,11 +12,19 @@
 ## 📋 This Week
 
 ### Monday Dec 22
-- [x] Design Transcript entity with one-to-one relationship to Report
-- [x] Create TranscriptRepository with findByVideoId method
-- [ ] Implement getTranscript() method in YoutubeService
-- [ ] Store transcripts in Transcript entity
-- [ ] Handle videos without captions (error handling)
+**What I accomplished:**
+- Designed Transcript entity with one-to-one relationship to Report using @JoinColumn
+- Created TranscriptRepository with findByVideoId method
+- Created TranscriptData DTO
+- Learned about JPA relationships, foreign keys, and when to decouple service methods
+- Debugged intentional bugs (missing setter, wrong parameter type)
+
+**What I didn't finish:**
+- Implement getTranscript() method in YoutubeService (needs library or HTTP client decision)
+- Store transcripts in Transcript entity
+- Handle videos without captions
+
+**Next session: Implement getTranscript() method to fetch actual YouTube transcripts**
 
 ### Tuesday Dec 23
 - [ ] Build keyword-based sentiment analyzer

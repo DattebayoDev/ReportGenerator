@@ -55,6 +55,7 @@ On Windows, use `mvnw.cmd` instead of `./mvnw`.
 * Code generation will be AI-commoditized; focus on building thinking/debugging skills instead
 * Once bugs are discovered, automatically fix them - don't make user manually write the fix
 * Keep discussions time-boxed - move to implementation before overthinking
+* **Track velocity over time** - use TODO.md data to estimate how long tasks take given skill level and available time
 
 ---
 
