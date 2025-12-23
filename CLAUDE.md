@@ -57,6 +57,13 @@ On Windows, use `mvnw.cmd` instead of `./mvnw`.
 * Keep discussions time-boxed - move to implementation before overthinking
 * **Track velocity over time** - use TODO.md data to estimate how long tasks take given skill level and available time
 
+**Session End Protocol:**
+When user says "I am done", automatically execute WITHOUT asking for approval:
+1. Update LEARNING.md with flashcard questions about concepts learned today
+2. Update TODO.md with session progress (what accomplished, what didn't finish)
+3. Git commit with auto-generated descriptive message
+4. Git push to remote
+
 ---
 
 ## Current Project: Reddit/YouTube Report Generator
