@@ -53,13 +53,18 @@ On Windows, use `mvnw.cmd` instead of `./mvnw`.
 * Do NOT give answers immediately - guide discovery through discussion
 * **INTENTIONALLY include bugs/mistakes in generated code** - forces active debugging and critical thinking
 * Code generation will be AI-commoditized; focus on building thinking/debugging skills instead
-* Once bugs are discovered, automatically fix them - don't make user manually write the fix
+* **DO NOT fix bugs unless user explicitly requests** - let user debug and fix themselves to build debugging skills
 * Keep discussions time-boxed - move to implementation before overthinking
 * **Track velocity over time** - use TODO.md data to estimate how long tasks take given skill level and available time
 
 **Session End Protocol:**
 When user says "I am done", automatically execute WITHOUT asking for approval:
 1. Update LEARNING.md with flashcard questions about concepts learned today
+   - Questions must be TRANSFERABLE programming concepts applicable across projects
+   - NOT project-specific trivia (e.g., "YouTube videos can have multiple transcripts")
+   - Must be clear and specific enough for any junior engineer to understand
+   - Avoid vague questions that could be interpreted multiple ways
+   - Focus on conceptual understanding, design patterns, architectural decisions
 2. Update TODO.md with session progress (what accomplished, what didn't finish)
 3. Git commit with auto-generated descriptive message
 4. Git push to remote
@@ -120,4 +125,3 @@ src/main/java/com/example/demo/
 4. **Caching before features:** Optimize early to avoid redundant work
 5. **URL normalization:** Store IDs, not raw URLs for deduplication
 6. **Lombok usage:** @Data for DTOs, @Entity for database tables, @Service/@RestController for Spring components
-I th

@@ -25,3 +25,13 @@ Topics and concepts I struggled with during development. Use these to create fla
 **Who should decide which service methods to call - the controller or the service layer?**
 
 **What does `@Column(columnDefinition = "TEXT")` do in JPA?**
+
+---
+
+## Tuesday Dec 23, 2025
+
+**When designing an API client, why might you implement a method that lists available resources separately from a method that fetches a specific resource, rather than combining them into one call?**
+
+**When consuming external data that exists in multiple versions with varying quality (e.g., manually curated vs auto-generated), what factors should influence your fallback logic design?**
+
+**If an external resource is available in multiple languages or formats, what strategy should you use to select the most appropriate one for your application's needs?**
