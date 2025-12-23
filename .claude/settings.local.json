@@ -1,10 +1,11 @@
 {
-  "spinnerTipsEnabled": false,
   "permissions": {
     "allow": [
       "Bash(git restore:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push)"
     ]
-  }
+  },
+  "spinnerTipsEnabled": false
 }

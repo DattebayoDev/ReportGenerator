@@ -59,15 +59,22 @@ On Windows, use `mvnw.cmd` instead of `./mvnw`.
 
 **Session End Protocol:**
 When user says "I am done", automatically execute WITHOUT asking for approval:
-1. Update LEARNING.md with flashcard questions about concepts learned today
+1. Ask user how long they coded (in minutes) for time tracking
+2. Update LEARNING.md with flashcard questions about concepts learned today
    - Questions must be TRANSFERABLE programming concepts applicable across projects
    - NOT project-specific trivia (e.g., "YouTube videos can have multiple transcripts")
    - Must be clear and specific enough for any junior engineer to understand
    - Avoid vague questions that could be interpreted multiple ways
    - Focus on conceptual understanding, design patterns, architectural decisions
-2. Update TODO.md with session progress (what accomplished, what didn't finish)
-3. Git commit with auto-generated descriptive message
-4. Git push to remote
+3. Update TODO.md with session summary including:
+   - Session duration (time spent coding)
+   - What was originally planned for today (from TODO.md)
+   - What actually accomplished
+   - What didn't finish
+   - Next session focus
+   - (Learning insights go in LEARNING.md, NOT TODO.md)
+4. Git commit with descriptive message (NO "Generated with Claude Code" attribution)
+5. Git push to remote
 
 ---
 
