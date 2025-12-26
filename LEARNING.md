@@ -49,3 +49,9 @@ Topics and concepts I struggled with during development. Use these to create fla
 **When reading unfamiliar third-party library code, what should guide how deeply you explore?**
 
 **What's the difference between "not knowing Java vocabulary" vs "not being able to think analytically"?**
+
+**Why can't you instantiate an interface directly, and what do you need instead?**
+
+**What does it mean when a class constructor has no access modifier (package-private)?**
+
+**What is a factory method pattern and why do libraries use it instead of exposing constructors directly?**

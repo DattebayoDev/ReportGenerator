@@ -22,9 +22,6 @@ public class YoutubeService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private YoutubeClient youtubeClient;
-
-    @Autowired
     private YoutubeTranscriptApi youtubeTranscriptApi;
 
     public YoutubeData getData(String videoId){

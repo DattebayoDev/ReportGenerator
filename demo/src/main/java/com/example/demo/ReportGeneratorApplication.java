@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import io.github.thoroldvix.api.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,5 +19,8 @@ public class ReportGeneratorApplication {
         return new RestTemplate();
     }
 
-
+    @Bean
+    public YoutubeTranscriptApi youtubeTranscriptApi() {
+        return TranscriptApiFactory.createDefault();
+    }
 }

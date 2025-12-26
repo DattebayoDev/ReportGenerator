@@ -55,7 +55,7 @@
 *Christmas break - no coding*
 
 ### Friday Dec 26
-**Session duration:** 30 minutes
+**Session duration:** 40 minutes
 
 **Originally planned:**
 - Replace mock RedditService with real API calls
@@ -65,14 +65,17 @@
 - Fetches English transcript using findTranscript("en")
 - Combines all transcript fragments into single text using streams
 - Updated CLAUDE.md with "build fundamentals first" learning principle
-- Discussed when to use AI vs reading code yourself during learning
+- Configured YoutubeTranscriptApi bean using TranscriptApiFactory.createDefault()
+- Removed unnecessary YoutubeClient dependency
+- Tested transcript fetching with real YouTube video (Rick Astley) - works!
+- Clarified product requirements: transcript fetch belongs in /analyze flow
 
 **What didn't finish:**
-- Test getTranscript() with real YouTube videos
+- Wire transcript saving into /analyze endpoint
 - Store transcripts in Transcript entity
 - Reddit API work (deferred)
 
-**Next session:** Test transcript fetching with real videos, then store in entity
+**Next session:** Wire transcript fetching and saving into /analyze endpoint
 
 ### Weekend (Dec 27-28)
 - [ ] Test getTranscript() with real YouTube videos

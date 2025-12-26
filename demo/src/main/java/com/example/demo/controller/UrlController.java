@@ -91,9 +91,6 @@ public class UrlController {
         return reportRepository.findAllByPlatform(convertedPlatform);
     }
 
-
-
-
     @GetMapping("/analyze")
     public List<UrlRequest> getUrl() {
         return urlRepository.findAll();
