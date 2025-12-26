@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Report;
+import com.example.demo.entity.Transcript;
 import com.example.demo.entity.UrlRequest;
 import com.example.demo.repository.ReportRepository;
+import com.example.demo.repository.TranscriptRepository;
 import com.example.demo.repository.UrlRepository;
 import com.example.demo.service.*;
+import io.github.thoroldvix.api.TranscriptRetrievalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +28,9 @@ public class UrlController {
     private ReportRepository reportRepository;
 
     @Autowired
+    private TranscriptRepository transcriptRepository;
+
+    @Autowired
     private YoutubeService youtubeService;
 
     @Autowired
@@ -37,7 +43,7 @@ public class UrlController {
     private ReportGenerator reportGenerator;
 
     @PostMapping("/analyze")
-    public Report postUrl(@RequestBody UrlRequest urlRequest) {
+    public Report postUrl(@RequestBody UrlRequest urlRequest) throws TranscriptRetrievalException {
         String postId;
         String platform = urlDetector.detectPlatform(urlRequest.getUrl());
         if (Objects.equals(platform, "YOUTUBE")) {
@@ -51,12 +57,17 @@ public class UrlController {
         }
 
         Report report = new Report();
+        Transcript transcript = new Transcript();
+
         if (Objects.equals(platform, "YOUTUBE")) {
             report.setPostId(postId);
             report.setPlatform(platform);
             report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData(postId)));
             report.setTimestamp(LocalDateTime.now());
+            transcript.setTranscriptText(youtubeService.getTranscript(postId).getTranscript());
             reportRepository.save(report);
+            transcript.setReport(report);
+            transcriptRepository.save(transcript);
         } else if (Objects.equals(platform, "REDDIT")) {
             report.setPostId(postId);
             report.setPlatform(platform);

@@ -55,7 +55,7 @@
 *Christmas break - no coding*
 
 ### Friday Dec 26
-**Session duration:** 40 minutes
+**Session duration:** 55 minutes (two stretches: 40 + 15)
 
 **Originally planned:**
 - Replace mock RedditService with real API calls
@@ -69,13 +69,14 @@
 - Removed unnecessary YoutubeClient dependency
 - Tested transcript fetching with real YouTube video (Rick Astley) - works!
 - Clarified product requirements: transcript fetch belongs in /analyze flow
+- Added transcript field to TranscriptData DTO
+- Wired transcript fetching into /analyze endpoint (YouTube only)
 
 **What didn't finish:**
-- Wire transcript saving into /analyze endpoint
-- Store transcripts in Transcript entity
+- Link Transcript to Report (missing transcript.setReport(report))
 - Reddit API work (deferred)
 
-**Next session:** Wire transcript fetching and saving into /analyze endpoint
+**Next session:** Fix Transcript-Report relationship, test full /analyze flow
 
 ### Weekend (Dec 27-28)
 - [ ] Test getTranscript() with real YouTube videos

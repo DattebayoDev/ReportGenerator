@@ -55,3 +55,7 @@ Topics and concepts I struggled with during development. Use these to create fla
 **What does it mean when a class constructor has no access modifier (package-private)?**
 
 **What is a factory method pattern and why do libraries use it instead of exposing constructors directly?**
+
+**When saving entities with a one-to-one relationship, why does the order of saves matter?**
+
+**If Entity A has a foreign key to Entity B, which entity must be saved first and why?**

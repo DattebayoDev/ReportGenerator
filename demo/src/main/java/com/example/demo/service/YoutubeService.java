@@ -46,6 +46,7 @@ public class YoutubeService {
         String finalBuild = fragments.stream()
                 .map(TranscriptContent.Fragment::getText)
                 .reduce("", (a, b) -> a + " " + b);
+        transcriptData.setTranscript(finalBuild);
         return transcriptData;
     }
 
