@@ -32,6 +32,7 @@ On Windows, use `mvnw.cmd` instead of `./mvnw`.
 **Learning Style:**
 * Impatient - wants SHORT, DIRECT answers
 * Hates when given full solutions immediately - wants guided discovery with hints
+* **Build fundamentals first** - read unfamiliar code yourself during learning; AI can accelerate understanding later, but only if you have the foundation to validate and internalize what it tells you
 * Struggles with analysis paralysis - overthinks and researches instead of building
 * Needs to feel progress through small, finished wins (30-60 min sessions)
 * Has abandoned projects when life interrupts - working on consistency

@@ -35,3 +35,17 @@ Topics and concepts I struggled with during development. Use these to create fla
 **When consuming external data that exists in multiple versions with varying quality (e.g., manually curated vs auto-generated), what factors should influence your fallback logic design?**
 
 **If an external resource is available in multiple languages or formats, what strategy should you use to select the most appropriate one for your application's needs?**
+
+---
+
+## Friday Dec 26, 2025
+
+**What is StringBuilder and why use it instead of string concatenation in a loop?**
+
+**Why are Strings immutable in Java, and what problem does this create when concatenating in a loop?**
+
+**When processing a list of items to combine into a single result, what are the two main approaches in Java?**
+
+**When reading unfamiliar third-party library code, what should guide how deeply you explore?**
+
+**What's the difference between "not knowing Java vocabulary" vs "not being able to think analytically"?**

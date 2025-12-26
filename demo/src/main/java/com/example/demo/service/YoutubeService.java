@@ -3,9 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.TranscriptData;
 import com.example.demo.dto.YoutubeApiResponse;
 import com.example.demo.dto.YoutubeData;
-import io.github.thoroldvix.api.TranscriptList;
-import io.github.thoroldvix.api.YoutubeClient;
-import io.github.thoroldvix.api.YoutubeTranscriptApi;
+import io.github.thoroldvix.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,20 +38,18 @@ public class YoutubeService {
         return youtubeData;
     }
 
-//    public TranscriptData getTranscript(String videoId) {
-//
-//        try {
-//            TranscriptList transcriptList = youtubeTranscriptApi.listTranscripts(videoId);
-//        } catch (Exception error) {
-//            return;
-//        }
-//
-////        StringBuilder fullTranscript = new StringBuilder();
-////        for (var segment : transcriptList) {
-////            fullTranscript.append(segment.text());
-////        }
-//
-//        return fullTranscript.toString();
-//    }
+    public TranscriptData getTranscript(String videoId) throws TranscriptRetrievalException {
+
+        TranscriptList transcriptList = youtubeTranscriptApi.listTranscripts(videoId);
+        Transcript transcript = transcriptList.findTranscript("en");
+        TranscriptData transcriptData = new TranscriptData();
+        transcriptData.setVideoId(videoId);
+        TranscriptContent content = transcript.fetch();
+        List<TranscriptContent.Fragment> fragments = content.getContent();
+        String finalBuild = fragments.stream()
+                .map(TranscriptContent.Fragment::getText)
+                .reduce("", (a, b) -> a + " " + b);
+        return transcriptData;
+    }
 
 }
