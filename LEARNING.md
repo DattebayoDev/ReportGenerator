@@ -62,7 +62,7 @@ Topics and concepts I struggled with during development. Use these to create fla
 
 ---
 
-## Friday Dec 27, 2025
+## Saturday Dec 27, 2025
 
 **When a third-party library conflicts with your framework's core dependency (e.g., Jackson version mismatch), what are the trade-offs between downgrading the framework vs replacing the library?**
 
