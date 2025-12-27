@@ -83,6 +83,11 @@ public class UrlController {
         return reportRepository.findAll();
     }
 
+    @GetMapping("/transcripts")
+    public List<Transcript> getAllTranscripts() {
+        return transcriptRepository.findAll();
+    }
+
     @GetMapping("/reports/{id}")
     public Report getReport(@PathVariable("id") String id ){
         return reportRepository.findByPostId(id);

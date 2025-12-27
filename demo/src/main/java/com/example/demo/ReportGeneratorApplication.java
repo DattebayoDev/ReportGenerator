@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import com.theokanning.openai.service.OpenAiService;
 import io.github.thoroldvix.api.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,9 @@ public class ReportGeneratorApplication {
 		SpringApplication.run(ReportGeneratorApplication.class, args);
 	}
 
+    @Value("${openai.api.key}")
+    private String openAiApiKey;
+
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
@@ -22,5 +27,10 @@ public class ReportGeneratorApplication {
     @Bean
     public YoutubeTranscriptApi youtubeTranscriptApi() {
         return TranscriptApiFactory.createDefault();
+    }
+
+    @Bean
+    public OpenAiService openAiService() {
+        return new OpenAiService(openAiApiKey);
     }
 }
