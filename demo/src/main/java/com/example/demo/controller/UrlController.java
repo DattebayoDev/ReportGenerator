@@ -34,6 +34,9 @@ public class UrlController {
     private YoutubeService youtubeService;
 
     @Autowired
+    private LlmService llmService;
+
+    @Autowired
     private RedditService redditService;
 
     @Autowired
@@ -58,6 +61,7 @@ public class UrlController {
 
         Report report = new Report();
         Transcript transcript = new Transcript();
+        llmService.summarize(transcript.getTranscriptText());
 
         if (Objects.equals(platform, "YOUTUBE")) {
             report.setPostId(postId);

@@ -1,6 +1,8 @@
 package com.example.demo;
 
-import com.theokanning.openai.service.OpenAiService;
+import com.openai.client.OpenAIClient;
+import com.openai.client.OpenAIClientImpl;
+import com.openai.client.okhttp.OpenAIOkHttpClient;
 import io.github.thoroldvix.api.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +18,8 @@ public class ReportGeneratorApplication {
 		SpringApplication.run(ReportGeneratorApplication.class, args);
 	}
 
-    @Value("${openai.api.key}")
-    private String openAiApiKey;
+//    @Value("${openai.api.key}")
+//    private String openAiApiKey;
 
     @Bean
     public RestTemplate restTemplate(){
@@ -29,8 +31,8 @@ public class ReportGeneratorApplication {
         return TranscriptApiFactory.createDefault();
     }
 
-    @Bean
-    public OpenAiService openAiService() {
-        return new OpenAiService(openAiApiKey);
-    }
+//    @Bean
+//    public OpenAIClient openAiService() {
+//        return OpenAIOkHttpClient.fromEnv(openAiApiKey);
+//    }
 }

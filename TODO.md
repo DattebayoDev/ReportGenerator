@@ -78,13 +78,31 @@
 
 **Next session:** Fix Transcript-Report relationship, test full /analyze flow
 
-### Weekend (Dec 27-28)
-- [ ] Test getTranscript() with real YouTube videos
-- [ ] Store fetched transcripts in Transcript entity
-- [ ] Add error handling for missing transcripts
-- [ ] Manual testing with various URLs
+### Friday Dec 27
+**Session duration:** 60 minutes
+
+**Originally planned:**
+- Fix Transcript-Report relationship (missing transcript.setReport(report))
+- Test full /analyze flow
+
+**What actually accomplished:**
+- Discovered Jackson version incompatibility between Spring Boot 4.0 (Jackson 2.18) and theokanning openai-gpt3-java library (Jackson 2.13)
+- Identified theokanning/openai-gpt3-java is archived and unmaintained
+- Researched dependency conflict resolution strategies (downgrade framework vs replace library)
+- Learned about "blast radius of change" and benefits of loose coupling
+- Swapped to official com.openai:openai-java library (4.13.0)
+- Updated LlmService to use new OpenAI SDK
+- Discovered environment variables vs application.properties distinction
+
+**What didn't finish:**
+- Complete OpenAI client bean configuration
+- Wire LlmService.summarize() into /analyze endpoint to actually use summaries
+- Test full transcript summarization flow
+- Fix Transcript-Report relationship
+
+**Next session:** Complete OpenAI integration, wire summarization into /analyze, test end-to-end flow
 
 ---
 
 ## 🎯 Current Focus
-**Friday Dec 26:** Transcript implementation complete, needs testing
+**Friday Dec 27:** OpenAI library migration in progress, needs completion and testing

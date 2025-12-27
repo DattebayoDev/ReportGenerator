@@ -59,3 +59,19 @@ Topics and concepts I struggled with during development. Use these to create fla
 **When saving entities with a one-to-one relationship, why does the order of saves matter?**
 
 **If Entity A has a foreign key to Entity B, which entity must be saved first and why?**
+
+---
+
+## Friday Dec 27, 2025
+
+**When a third-party library conflicts with your framework's core dependency (e.g., Jackson version mismatch), what are the trade-offs between downgrading the framework vs replacing the library?**
+
+**What is "blast radius of change" in software architecture, and how does loose coupling minimize it when swapping dependencies?**
+
+**When two versions of the same dependency exist in a Maven project (one from your framework, one from a third-party library), which version gets loaded at runtime and why?**
+
+**What's the difference between OS environment variables and application-specific configuration files (like application.properties), and why can't third-party Java libraries read Spring Boot configuration?**
+
+**Before adding a third-party library dependency, what indicators on GitHub suggest it might be unmaintained or incompatible with modern frameworks?**
+
+**If you isolate third-party library usage to a single service class (e.g., LlmService), how many files need changes when swapping that library for a different one?**

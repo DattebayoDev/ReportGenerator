@@ -70,11 +70,11 @@
 			<version>0.4.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.theokanning.openai-gpt3-java</groupId>
-			<artifactId>service</artifactId>
-			<version>0.18.2</version>
-		</dependency>
+        <dependency>
+            <groupId>com.openai</groupId>
+            <artifactId>openai-java</artifactId>
+            <version>4.13.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>
