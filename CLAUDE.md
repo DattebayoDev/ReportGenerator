@@ -1,3 +1,9 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
 ## Current Project: Report Generator
 
 **The Idea:**
@@ -42,7 +48,9 @@ API that accepts URLs and generates concise reports based on content. Saves time
 **Session End Protocol:**
 When user says "I am done", automatically execute WITHOUT asking for approval:
 1. Ask user how long they coded (in minutes) for time tracking
-2. Update LEARNING.md with flashcard questions about concepts learned today
+2. Update LEARNING.md with flashcard questions about concepts learned today:
+   - **Format:** Brief narrative intro (1-2 sentences) + flashcard questions
+   - Rolling 2-week window (older questions archived to HISTORY.md when needed)
    - Questions must be TRANSFERABLE programming concepts applicable across projects
    - NOT project-specific trivia (e.g., "YouTube videos can have multiple transcripts")
    - Must be clear and specific enough for any junior engineer to understand
