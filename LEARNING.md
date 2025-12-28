@@ -1,10 +1,15 @@
-# Learning Topics
+# Learning - Flashcard Questions
 
-Topics and concepts I struggled with during development. Use these to create flashcards.
+*Rolling 2-week window. Older questions will be archived to HISTORY.md.*
+
+Transferable programming concepts that came up during development. Questions are designed for spaced repetition and flashcard review.
 
 ---
 
-## Monday Dec 22, 2025
+## Week of Dec 22-28, 2025
+
+### Monday Dec 22
+Worked on designing the Transcript entity and understanding JPA relationships. Spent a lot of time wrapping my head around foreign keys and when to decouple service methods.
 
 **What does `@OneToOne` annotation do in JPA?**
 
@@ -26,9 +31,8 @@ Topics and concepts I struggled with during development. Use these to create fla
 
 **What does `@Column(columnDefinition = "TEXT")` do in JPA?**
 
----
-
-## Tuesday Dec 23, 2025
+### Tuesday Dec 23
+Started implementing getTranscript() and discovered that videos can have multiple transcripts with varying quality. Had to think through API client design patterns and fallback logic.
 
 **When designing an API client, why might you implement a method that lists available resources separately from a method that fetches a specific resource, rather than combining them into one call?**
 
@@ -36,9 +40,8 @@ Topics and concepts I struggled with during development. Use these to create fla
 
 **If an external resource is available in multiple languages or formats, what strategy should you use to select the most appropriate one for your application's needs?**
 
----
-
-## Friday Dec 26, 2025
+### Friday Dec 26
+Completed the transcript fetching implementation using streams. Learned about StringBuilder, immutability, factory patterns, and the importance of understanding when to stop exploring third-party code.
 
 **What is StringBuilder and why use it instead of string concatenation in a loop?**
 
@@ -60,9 +63,8 @@ Topics and concepts I struggled with during development. Use these to create fla
 
 **If Entity A has a foreign key to Entity B, which entity must be saved first and why?**
 
----
-
-## Saturday Dec 27, 2025
+### Saturday Dec 27
+Ran into a Jackson version conflict between Spring Boot and an archived library. Had to research dependency management, learned about blast radius of change, and swapped to a maintained library. Also discovered the difference between environment variables and application.properties.
 
 **When a third-party library conflicts with your framework's core dependency (e.g., Jackson version mismatch), what are the trade-offs between downgrading the framework vs replacing the library?**
 
@@ -76,9 +78,8 @@ Topics and concepts I struggled with during development. Use these to create fla
 
 **If you isolate third-party library usage to a single service class (e.g., LlmService), how many files need changes when swapping that library for a different one?**
 
----
-
-## Sunday Dec 28, 2025
+### Sunday Dec 28
+Session crashed but recovered context. During code review, identified several knowledge gaps around JPA save ordering, transaction rollback, configuration patterns, and the OpenAI SDK. Understanding why code works is different from making it work.
 
 **When saving two entities with a one-to-one relationship where Entity A has a foreign key to Entity B, which entity must be saved first and why does the order matter?**
 

@@ -1,31 +1,12 @@
-# CLAUDE.md
+## Current Project: Report Generator
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+**The Idea:**
+API that accepts URLs and generates concise reports based on content. Saves time by summarizing whether content is worth consuming.
 
-## Build and Run Commands
-
-All commands should be run from the `demo/` directory.
-
-```bash
-# Build the project
-./mvnw clean install
-
-# Run the application
-./mvnw spring-boot:run
-
-# Run tests
-./mvnw test
-
-# Run a single test class
-./mvnw test -Dtest=ReportGeneratorApplicationTests
-
-# Run a single test method
-./mvnw test -Dtest=ReportGeneratorApplicationTests#contextLoads
-```
-
-On Windows, use `mvnw.cmd` instead of `./mvnw`.
-
----
+**Why This Project:**
+* Solves YOUR actual problem (wasting time on videos/threads)
+* More exciting than generic CRUD apps
+* Can build incrementally with daily 30-min wins
 
 ## Your Profile as a Programmer
 
@@ -80,58 +61,3 @@ When user says "I am done", automatically execute WITHOUT asking for approval:
 5. Git push to remote
 
 ---
-
-## Current Project: Reddit/YouTube Report Generator
-
-**The Idea:**
-API that accepts Reddit/YouTube links and generates concise reports based on content. Saves time by summarizing whether content is worth consuming.
-
-**Why This Project:**
-* Solves YOUR actual problem (wasting time on videos/threads)
-* More exciting than generic CRUD apps
-* Can build incrementally with daily 30-min wins
-* Eventually will integrate real APIs (YouTube transcription, Reddit API)
-
-**Tech Stack:**
-* Spring Boot 4.0.0 with Java 25
-* IntelliJ configured to delegate builds to Maven (for Java 25 compatibility)
-* Lombok for boilerplate reduction
-* H2 in-memory database (for now)
-* Spring JPA for database operations
-
----
-
-## Current Code Structure
-
-```
-src/main/java/com/example/demo/
-├── controller/
-│   └── UrlController.java          # POST /analyze, GET /analyze
-├── dto/
-│   ├── YoutubeData.java            # title, channel, duration
-│   ├── RedditData.java             # title, description, upvote
-│   └── TranscriptData.java         # videoId, transcript
-├── entity/
-│   ├── Report.java                 # id, postId, platform, summary, timestamp
-│   └── Transcript.java             # id, videoId, transcriptText, report (1:1)
-├── repository/
-│   ├── ReportRepository.java       # findByUrl(String url)
-│   └── TranscriptRepository.java   # findByVideoId(String videoId)
-├── service/
-│   ├── UrlDetector.java            # detectPlatform(String url)
-│   ├── UrlParser.java              # parseYoutubeUrl(), parseRedditUrl()
-│   ├── YoutubeService.java         # getMetadata() - fetches real YouTube data via API
-│   ├── RedditService.java          # getData() - returns mock data
-│   └── ReportGenerator.java        # generateYoutubeReport(), generateRedditReport()
-```
-
----
-
-## Key Patterns & Decisions Made
-
-1. **Three-layer architecture:** Controller → Service → Repository
-2. **Mock-first approach:** Build with fake data, swap in real APIs later
-3. **Single responsibility:** Each service has ONE job
-4. **Caching before features:** Optimize early to avoid redundant work
-5. **URL normalization:** Store IDs, not raw URLs for deduplication
-6. **Lombok usage:** @Data for DTOs, @Entity for database tables, @Service/@RestController for Spring components
