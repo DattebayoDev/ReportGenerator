@@ -61,14 +61,13 @@ public class UrlController {
 
         Report report = new Report();
         Transcript transcript = new Transcript();
-        llmService.summarize(transcript.getTranscriptText());
 
         if (Objects.equals(platform, "YOUTUBE")) {
             report.setPostId(postId);
             report.setPlatform(platform);
-            report.setSummary(reportGenerator.generateYoutubeReport(youtubeService.getData(postId)));
             report.setTimestamp(LocalDateTime.now());
-            transcript.setTranscriptText(youtubeService.getTranscript(postId).getTranscript());
+            transcript.setTranscriptText(youtubeService.getTranscript(postId).getTranscript());;
+            report.setSummary(llmService.summarize(transcript.getTranscriptText()));
             reportRepository.save(report);
             transcript.setReport(report);
             transcriptRepository.save(transcript);

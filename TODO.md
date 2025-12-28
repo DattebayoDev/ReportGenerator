@@ -102,7 +102,87 @@
 
 **Next session:** Complete OpenAI integration, wire summarization into /analyze, test end-to-end flow
 
+### Sunday Dec 28
+**Session duration:** 75 minutes
+
+**Originally planned:**
+- Complete OpenAI integration
+- Wire LlmService.summarize() into /analyze endpoint
+- Test full transcript summarization flow
+
+**What actually accomplished:**
+- Session crashed mid-work, recovered context
+- Confirmed MVP is FULLY WORKING for YouTube:
+  - Real transcript fetching ✓
+  - OpenAI GPT-4 summarization ✓
+  - File-based H2 persistence ✓
+  - Report-Transcript one-to-one relationship working ✓
+- Restored deleted Reddit files (mock code preserved for later)
+- Identified knowledge gaps during code review:
+  - Why save order matters for JPA entities with foreign keys
+  - Transaction rollback behavior on exceptions
+  - @Value vs System.getenv() usage patterns
+  - OpenAI Responses API vs Chat Completions API
+- Planned deployment sprint for next week (Railway)
+
+**What didn't finish:**
+- Environment variable externalization (API keys still in application.properties)
+- Railway deployment
+- Production testing
+
+**Next week:** Deploy to Railway following sprint plan below
+
+---
+
+## 🎯 Week of Dec 29, 2025 - Jan 4, 2026: Railway Deployment Sprint
+
+**Current Status:** YouTube MVP complete and tested locally. Ready for deployment.
+
+### Block 1: Externalize API Keys
+- Move `youtube.api` and `OPENAI_API_KEY` from application.properties to environment variables
+- Update LlmService to use proper environment variable naming
+- Test locally with environment variables set
+- **Goal:** App runs locally using OS environment variables instead of hardcoded values
+
+### Block 2: Railway Setup
+- Create Railway account
+- Create new project for Report Generator
+- Connect GitHub repository to Railway
+- **Goal:** Railway project configured and linked to repo
+
+### Block 3: Configure Railway Environment
+- Add `YOUTUBE_API` environment variable in Railway dashboard
+- Add `OPENAI_API_KEY` environment variable in Railway dashboard
+- Configure H2 file persistence path for Railway filesystem
+- **Goal:** All secrets and config ready in Railway
+
+### Block 4: First Deployment
+- Deploy to Railway
+- Monitor build logs for errors
+- Verify Spring Boot application starts successfully
+- **Goal:** App deployed and running on Railway
+
+### Block 5: Test Deployed App
+- POST YouTube URL to Railway endpoint
+- Verify transcript fetching works in production
+- Verify OpenAI summarization works in production
+- Check database persistence across restarts
+- **Goal:** Full YouTube flow working in production
+
+### Block 6: Fix Issues (Buffer)
+- Debug any deployment-specific errors
+- Adjust Railway configuration as needed
+- Handle any environment-specific bugs
+- **Goal:** Stable production deployment
+
+### Block 7: Production Usage
+- Start using deployed app for real YouTube videos
+- Collect feedback on summary quality
+- Document any issues or improvements needed
+- Plan next features (Reddit API? Better prompts? UI?)
+- **Goal:** Actually using the product you built
+
 ---
 
 ## 🎯 Current Focus
-**Saturday Dec 27:** OpenAI library migration in progress, needs completion and testing
+**Sunday Dec 28:** MVP complete, ready for deployment. Next week focuses entirely on getting to production on Railway.

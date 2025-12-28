@@ -75,3 +75,21 @@ Topics and concepts I struggled with during development. Use these to create fla
 **Before adding a third-party library dependency, what indicators on GitHub suggest it might be unmaintained or incompatible with modern frameworks?**
 
 **If you isolate third-party library usage to a single service class (e.g., LlmService), how many files need changes when swapping that library for a different one?**
+
+---
+
+## Sunday Dec 28, 2025
+
+**When saving two entities with a one-to-one relationship where Entity A has a foreign key to Entity B, which entity must be saved first and why does the order matter?**
+
+**If a database save operation for Entity A succeeds, but then an exception is thrown before Entity B is saved, what happens to the data? What is transaction rollback and when does it occur?**
+
+**What is the difference between `@Value("${property.name}")` reading from application.properties vs `System.getenv("ENV_VAR")` reading from OS environment variables?**
+
+**When should you use application.properties vs environment variables for configuration in Spring Boot?**
+
+**In the OpenAI Java SDK, what is the difference between the Responses API (`ResponseCreateParams`) and the Chat Completions API (`ChatCompletionRequest`)?**
+
+**When chaining method calls like `response.output().getFirst().message().get().content()`, what does the `.get()` method typically indicate, and what Java construct is it commonly associated with?**
+
+**If you're reading third-party library documentation to implement an integration, what's more important: understanding why the API is designed that way, or just following the example code to make it work?**
