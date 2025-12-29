@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class LlmService {
 
-    @Value("${OPENAI_API_KEY}")
+    @Value("${OPENAI_API}")
     private String apiKey;
 
     public String summarize(String transcript) {
