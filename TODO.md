@@ -53,7 +53,8 @@ Start using the deployed app for real YouTube videos that I actually want to wat
 
 ---
 
-### Session Logs
+<details>
+<summary><b>Session Logs</b></summary>
 
 #### Monday Dec 30 (45 minutes)
 **What was planned:** Complete Block 1 by testing the app locally with environment variables to confirm everything still works after externalizing API keys.
@@ -73,11 +74,14 @@ Start using the deployed app for real YouTube videos that I actually want to wat
 
 **Next session:** Move to Block 3 and configure Railway environment variables. Add the API keys to Railway dashboard and verify the deployment configuration is ready for the first deployment attempt.
 
+</details>
+
 ---
 
 ## Past Weeks
 
-### Week of Dec 22-28, 2025
+<details>
+<summary><b>Week of Dec 22-28, 2025</b></summary>
 
 #### Monday Dec 22 (Session time not tracked)
 **What was planned:** Start implementing getTranscript() method to fetch actual YouTube transcripts.
@@ -116,3 +120,5 @@ Start using the deployed app for real YouTube videos that I actually want to wat
 **What actually happened:** Session crashed mid-work but recovered context successfully. Confirmed that the MVP is FULLY WORKING for YouTube with real transcript fetching, OpenAI GPT-4 summarization, file-based H2 persistence, and a working Report-Transcript one-to-one relationship. Restored the deleted Reddit files to preserve mock code for later. Identified several knowledge gaps during code review including why save order matters for JPA entities with foreign keys, transaction rollback behavior on exceptions, the difference between @Value and System.getenv() usage patterns, and the difference between OpenAI's Responses API and Chat Completions API. Planned the deployment sprint for next week targeting Railway.
 
 **What didn't finish:** API keys are still hardcoded in application.properties and need to be externalized to environment variables. Railway deployment hasn't started yet. Production testing hasn't happened.
+
+</details>
