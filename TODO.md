@@ -54,9 +54,9 @@ Start using the deployed app for real YouTube videos that I actually want to wat
 ---
 
 <details>
-<summary><b>Session Logs</b></summary>
+<summary><b>Monday Dec 29 (90 minutes total)</b></summary>
 
-#### Monday Dec 30 (45 minutes)
+#### Session 1 (45 minutes)
 **What was planned:** Complete Block 1 by testing the app locally with environment variables to confirm everything still works after externalizing API keys.
 
 **What actually happened:** Fixed multiple configuration issues to get the app deployment-ready. Discovered that Lombok annotations weren't working with Maven CLI builds even though IntelliJ compiled fine. Added maven-compiler-plugin configuration with annotationProcessorPaths to enable Lombok annotation processing during Maven compilation. Cleaned up Report and Transcript entities by removing all manual getters and setters, replacing them with @Getter and @Setter annotations. Fixed "table report not found" errors by adding spring.jpa.hibernate.ddl-auto=update to application.properties, which tells Hibernate to automatically generate tables from entity classes. Tested the full app locally with environment variables and confirmed that transcript fetching, OpenAI summarization, and database persistence all work correctly. Block 1 is now complete.
@@ -65,14 +65,14 @@ Start using the deployed app for real YouTube videos that I actually want to wat
 
 **Next session:** Move to Block 2 and set up Railway. Create an account, start a new project, and connect the GitHub repository for automatic deployments.
 
-#### Tuesday Dec 31 (45 minutes)
+#### Session 2 (45 minutes)
 **What was planned:** Complete Block 2 by setting up Railway. Create an account, start a new project, and connect the GitHub repository for automatic deployments.
 
-**What actually happened:** Downgraded from Java 24 to Java 17 to resolve Railway deployment compatibility issues. Discovered that Java 17 doesn't support the List.getFirst() method, which was added in Java 21 as part of the Sequenced Collections feature. Replaced getFirst() calls with get(0) in LlmService.java to maintain Java 17 compatibility. Updated pom.xml to target Java 17 and configured IntelliJ to use the correct JDK. Completed Railway account setup and connected the GitHub repository to the Railway project for automatic deployments. Block 2 is now complete.
+**What actually happened:** Downgraded from Java 24 to Java 17 to resolve Railway deployment compatibility issues. Discovered that Java 17 doesn't support the List.getFirst() method, which was added in Java 21 as part of the Sequenced Collections feature. Replaced getFirst() calls with get(0) in LlmService.java to maintain Java 17 compatibility. Updated pom.xml to target Java 17 and configured IntelliJ to use the correct JDK. Completed Railway account setup and connected the GitHub repository to the Railway project for automatic deployments. Completed Blocks 2, 3, 4, and 5 (Railway setup, environment configuration, first deployment, and testing).
 
-**What didn't finish:** Railway environment variables haven't been configured yet. Need to add YOUTUBE_API and OPENAI_API_KEY to the Railway dashboard (Block 3).
+**What didn't finish:** First video POSTed works but subsequent videos return the original video's data. JSON responses appear as one line in production instead of pretty-printed. Need to debug both issues.
 
-**Next session:** Move to Block 3 and configure Railway environment variables. Add the API keys to Railway dashboard and verify the deployment configuration is ready for the first deployment attempt.
+**Next session:** Debug the duplicate video bug (Block 6) and fix JSON response formatting (Block 7).
 
 </details>
 
