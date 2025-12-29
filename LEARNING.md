@@ -117,3 +117,18 @@ Ran into Lombok annotation processing issues with Maven CLI. The app compiled fi
 **What does Hibernate automatically generate from your @Entity classes when spring.jpa.hibernate.ddl-auto is set to update or create?**
 
 **When using H2 file-based persistence with jdbc:h2:file:./data/reportdb, what physical files are created on disk and what do they contain?**
+
+### Tuesday Dec 31
+Encountered Java version compatibility issues when downgrading from Java 24 to Java 17 for Railway deployment. Ran into a compilation error with List.getFirst() because that method didn't exist in Java 17.
+
+**When you see a "cannot find symbol" error for a method on a standard Java class like List, what should you suspect about the Java version you're using?**
+
+**How do you determine which Java version introduced a specific method like List.getFirst()?**
+
+**If you downgrade from Java 21+ to Java 17, what happens to code using List.getFirst() or List.getLast(), and how do you fix it?**
+
+**What's the difference between a compilation error saying "cannot find symbol" for a method vs other types of compilation errors?**
+
+**When targeting a specific Java version (e.g., Java 17), why isn't it enough to just set the version in pom.xml - what else could break?**
+
+**If a method exists in newer Java versions but not in your target version, what are your options for achieving the same functionality?**

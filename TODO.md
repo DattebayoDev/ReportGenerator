@@ -10,8 +10,8 @@
 
 **Deployment Blocks:**
 - ~~**Block 1: Externalize API Keys**~~ ✓ Complete
-- **Block 2: Railway Setup** ← Next
-- **Block 3: Configure Railway Environment**
+- ~~**Block 2: Railway Setup**~~ ✓ Complete
+- **Block 3: Configure Railway Environment** ← Next
 - **Block 4: First Deployment**
 - **Block 5: Test Deployed App**
 - **Block 6: Fix Issues (Buffer)**
@@ -55,6 +55,15 @@ Start using the deployed app for real YouTube videos that I actually want to wat
 **What didn't finish:** Railway deployment hasn't started yet. Need to create a Railway account and configure the project (Block 2).
 
 **Next session:** Move to Block 2 and set up Railway. Create an account, start a new project, and connect the GitHub repository for automatic deployments.
+
+#### Tuesday Dec 31 (45 minutes)
+**What was planned:** Complete Block 2 by setting up Railway. Create an account, start a new project, and connect the GitHub repository for automatic deployments.
+
+**What actually happened:** Downgraded from Java 24 to Java 17 to resolve Railway deployment compatibility issues. Discovered that Java 17 doesn't support the List.getFirst() method, which was added in Java 21 as part of the Sequenced Collections feature. Replaced getFirst() calls with get(0) in LlmService.java to maintain Java 17 compatibility. Updated pom.xml to target Java 17 and configured IntelliJ to use the correct JDK. Completed Railway account setup and connected the GitHub repository to the Railway project for automatic deployments. Block 2 is now complete.
+
+**What didn't finish:** Railway environment variables haven't been configured yet. Need to add YOUTUBE_API and OPENAI_API_KEY to the Railway dashboard (Block 3).
+
+**Next session:** Move to Block 3 and configure Railway environment variables. Add the API keys to Railway dashboard and verify the deployment configuration is ready for the first deployment attempt.
 
 ---
 
