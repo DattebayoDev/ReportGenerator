@@ -11,11 +11,13 @@
 **Deployment Blocks:**
 - ~~**Block 1: Externalize API Keys**~~ ✓ Complete
 - ~~**Block 2: Railway Setup**~~ ✓ Complete
-- **Block 3: Configure Railway Environment** ← Next
-- **Block 4: First Deployment**
-- **Block 5: Test Deployed App**
-- **Block 6: Fix Issues (Buffer)**
-- **Block 7: Production Usage**
+- ~~**Block 3: Configure Railway Environment**~~ ✓ Complete
+- ~~**Block 4: First Deployment**~~ ✓ Complete
+- ~~**Block 5: Test Deployed App**~~ ✓ Complete
+- **Block 6: Debug Duplicate Video Bug** ← Next
+- **Block 7: Fix JSON Response Formatting**
+- **Block 8: Other Issues (Buffer)**
+- **Block 9: Production Usage**
 
 <details>
 <summary><b>Block Details</b></summary>
@@ -32,13 +34,19 @@ Add the YOUTUBE_API environment variable in the Railway dashboard. Add the OPENA
 **Block 4: First Deployment**
 Deploy to Railway and monitor the build logs for errors. Verify that the Spring Boot application starts successfully in the Railway environment. **Goal:** App is deployed and running on Railway.
 
-**Block 5: Test Deployed App**
+**Block 5: Test Deployed App** ✓
 POST a YouTube URL to the Railway endpoint and verify that transcript fetching works in production. Confirm that OpenAI summarization works in production and check that database persistence works across restarts. **Goal:** The full YouTube flow is working in production.
 
-**Block 6: Fix Issues (Buffer)**
-Debug any deployment-specific errors that come up. Adjust Railway configuration as needed and handle any environment-specific bugs that only appear in production. **Goal:** A stable production deployment that reliably works.
+**Block 6: Debug Duplicate Video Bug**
+Investigate why the first video POSTed works correctly, but subsequent videos return the original video's data instead of processing new ones. Trace through the request flow from UrlController → YoutubeService → database to identify where duplicate detection or caching is preventing new videos from being saved. Add logging if needed to see what's happening with each POST request. **Goal:** Every unique YouTube URL should be processed and saved correctly.
 
-**Block 7: Production Usage**
+**Block 7: Fix JSON Response Formatting**
+Figure out why JSON responses are pretty-printed in localhost but appear as one line in production. Research Spring Boot JSON formatting configuration and ensure production responses are human-readable. **Goal:** Production API responses should be formatted the same way as localhost.
+
+**Block 8: Other Issues (Buffer)**
+Debug any other deployment-specific errors that come up. Adjust Railway configuration as needed and handle any environment-specific bugs that only appear in production. **Goal:** A stable production deployment that reliably works.
+
+**Block 9: Production Usage**
 Start using the deployed app for real YouTube videos that I actually want to watch. Collect feedback on summary quality to see if the prompts need improvement. Document any issues or ideas for improvements. Plan what comes next whether that's Reddit API integration, better prompts, or maybe even a UI. **Goal:** Actually using the product I built instead of just building it.
 
 </details>
