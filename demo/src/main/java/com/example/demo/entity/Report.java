@@ -1,16 +1,15 @@
 package com.example.demo.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 public class Report {
 
     @Id
@@ -19,24 +18,11 @@ public class Report {
 
     private String postId;
     private String platform;
+
+    @Column(columnDefinition = "TEXT")
     private String summary;
+
     private LocalDateTime timestamp;
 
     public Report(){};
-
-    public void setPlatform(String platform) {
-        this.platform = platform;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 }

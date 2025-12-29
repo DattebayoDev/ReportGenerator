@@ -2,9 +2,11 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 public class Transcript {
 
     @Id
@@ -21,16 +23,4 @@ public class Transcript {
     private Report report;
 
     public Transcript() {}
-
-    public void setVideoId(String videoId) {
-        this.videoId = videoId;
-    }
-
-    public void setTranscriptText(String transcriptText) {
-        this.transcriptText = transcriptText;
-    }
-
-    public void setReport(Report report) {
-        this.report = report;
-    }
 }

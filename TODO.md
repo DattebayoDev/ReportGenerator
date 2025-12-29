@@ -50,6 +50,15 @@
 
 **Status heading into this week:** The YouTube MVP is complete and tested locally. It's ready for deployment.
 
+### Monday Dec 30 (45 minutes)
+**What was planned:** Complete Block 1 by testing the app locally with environment variables to confirm everything still works after externalizing API keys.
+
+**What actually happened:** Fixed multiple configuration issues to get the app deployment-ready. Discovered that Lombok annotations weren't working with Maven CLI builds even though IntelliJ compiled fine. Added maven-compiler-plugin configuration with annotationProcessorPaths to enable Lombok annotation processing during Maven compilation. Cleaned up Report and Transcript entities by removing all manual getters and setters, replacing them with @Getter and @Setter annotations. Fixed "table report not found" errors by adding spring.jpa.hibernate.ddl-auto=update to application.properties, which tells Hibernate to automatically generate tables from entity classes. Tested the full app locally with environment variables and confirmed that transcript fetching, OpenAI summarization, and database persistence all work correctly. Block 1 is now complete.
+
+**What didn't finish:** Railway deployment hasn't started yet. Need to create a Railway account and configure the project (Block 2).
+
+**Next session:** Move to Block 2 and set up Railway. Create an account, start a new project, and connect the GitHub repository for automatic deployments.
+
 ### Block 1: Externalize API Keys
 Move youtube.api and OPENAI_API_KEY from application.properties to environment variables. Update LlmService to use proper environment variable naming conventions. Test locally with environment variables set to make sure everything still works. **Goal:** The app should run locally using OS environment variables instead of hardcoded values.
 

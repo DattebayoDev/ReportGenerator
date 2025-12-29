@@ -94,3 +94,26 @@ Session crashed but recovered context. During code review, identified several kn
 **When chaining method calls like `response.output().getFirst().message().get().content()`, what does the `.get()` method typically indicate, and what Java construct is it commonly associated with?**
 
 **If you're reading third-party library documentation to implement an integration, what's more important: understanding why the API is designed that way, or just following the example code to make it work?**
+
+---
+
+## Week of Dec 29, 2025 - Jan 4, 2026
+
+### Monday Dec 30
+Ran into Lombok annotation processing issues with Maven CLI. The app compiled fine in IntelliJ but failed during mvn clean install. Had to configure Maven's compiler plugin to enable annotation processing and learned about the difference between IDE compilation and Maven CLI compilation.
+
+**Why might Lombok annotations work in IntelliJ but fail when running mvn clean install from the command line?**
+
+**What is annotation processing in Java compilation, and why does it need to be explicitly enabled in Maven's compiler plugin?**
+
+**In Maven's compiler plugin configuration, what does the `<annotationProcessorPaths>` element do, and why is it needed for Lombok?**
+
+**What are the different modes of `spring.jpa.hibernate.ddl-auto` and what does each one do?**
+
+**What's the difference between `ddl-auto=update` and `ddl-auto=create` in terms of data persistence?**
+
+**If you see a "table not found" error in a Spring Boot JPA application, but your @Entity classes are correctly annotated, what configuration property is likely missing?**
+
+**What does Hibernate automatically generate from your @Entity classes when spring.jpa.hibernate.ddl-auto is set to update or create?**
+
+**When using H2 file-based persistence with jdbc:h2:file:./data/reportdb, what physical files are created on disk and what do they contain?**

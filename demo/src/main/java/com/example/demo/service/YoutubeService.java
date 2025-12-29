@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class YoutubeService {
 
-    @Value("${youtube.api}")
+    @Value("${YOUTUBE_API}")
     private String apiKey;
 
     @Autowired
