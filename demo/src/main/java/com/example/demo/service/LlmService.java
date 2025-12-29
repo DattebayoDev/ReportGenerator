@@ -27,6 +27,6 @@ public class LlmService {
         .build();
 
         Response response = client.responses().create(params);
-        return response.output().getFirst().message().get().content().getFirst().asOutputText().text();
+        return response.output().get(0).message().get().content().get(0).asOutputText().text();
     }
 }

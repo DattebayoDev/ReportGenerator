@@ -4,9 +4,11 @@
       "Bash(git restore:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(./mvnw:*)",
+      "WebSearch"
     ]
   },
-  "spinnerTipsEnabled": false,
-  "outputStyle": "Learning"
+  "outputStyle": "Learning",
+  "spinnerTipsEnabled": false
 }
