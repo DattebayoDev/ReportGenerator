@@ -4,54 +4,58 @@
 
 ---
 
-## Week of Dec 29, 2025 - Jan 4, 2026: Railway Deployment Sprint
+## Week of Dec 30, 2025 - Jan 5, 2026: Web UI Sprint
 
-**Status:** The YouTube MVP is complete and tested locally. Ready for deployment.
+**Status:** Railway deployment complete. API works but not usable without UI. Building web interface to make the tool actually usable.
 
-**Deployment Blocks:**
-- ~~**Block 1: Externalize API Keys**~~ ✓ Complete
-- ~~**Block 2: Railway Setup**~~ ✓ Complete
-- ~~**Block 3: Configure Railway Environment**~~ ✓ Complete
-- ~~**Block 4: First Deployment**~~ ✓ Complete
-- ~~**Block 5: Test Deployed App**~~ ✓ Complete
-- **Block 6: Debug Duplicate Video Bug** ← Next
-- **Block 7: Fix JSON Response Formatting**
-- **Block 8: Other Issues (Buffer)**
-- **Block 9: Production Usage**
+**Web UI Blocks:**
+- **Block 1: Create HTML Form Page** ← Next
+- **Block 2: Wire Form to /analyze API**
+- **Block 3: Display Summary Results**
+- **Block 4: Add Reports History View**
+- **Block 5: Deploy UI and Daily Usage**
 
 <details>
 <summary><b>Block Details</b></summary>
 
-**Block 1: Externalize API Keys** ✓
-Move youtube.api and OPENAI_API_KEY from application.properties to environment variables. Update LlmService to use proper environment variable naming conventions. Test locally with environment variables set to make sure everything still works. **Goal:** The app should run locally using OS environment variables instead of hardcoded values.
+**Block 1: Create HTML Form Page**
+Create an index.html file with a simple form that has a text input for YouTube URLs and a submit button. Set up Spring Boot to serve static files from the resources/static directory. Add basic CSS to make it not look terrible. Test that visiting the root URL shows the form. **Goal:** A functional HTML page with a URL input form that loads when you visit the app.
 
-**Block 2: Railway Setup**
-Create a Railway account and start a new project for Report Generator. Connect the GitHub repository to Railway so deployments can happen automatically. **Goal:** Railway project is configured and linked to the repo.
+**Block 2: Wire Form to /analyze API**
+Add JavaScript to handle form submission. Prevent default form behavior and instead make a POST request to /analyze endpoint with the URL in the request body. Handle loading state while waiting for the API response. Add basic error handling for failed requests or invalid URLs. **Goal:** Clicking submit sends the URL to the backend and receives a response.
 
-**Block 3: Configure Railway Environment**
-Add the YOUTUBE_API environment variable in the Railway dashboard. Add the OPENAI_API_KEY environment variable as well. Configure the H2 file persistence path to work with Railway's filesystem. **Goal:** All secrets and configuration are properly set up in Railway.
+**Block 3: Display Summary Results**
+Parse the JSON response from /analyze and display the summary on the page. Show the video title, platform, timestamp, and summary text in a clean layout. Add a loading spinner while analysis is in progress. Handle edge cases like videos without transcripts or API errors. **Goal:** Users see the summary immediately after submitting a URL without needing to check JSON in browser tools.
 
-**Block 4: First Deployment**
-Deploy to Railway and monitor the build logs for errors. Verify that the Spring Boot application starts successfully in the Railway environment. **Goal:** App is deployed and running on Railway.
+**Block 4: Add Reports History View**
+Create a second page or section that calls GET /reports and displays all previously analyzed videos. Show a table or list with video ID, platform, timestamp, and a link to view the full summary. Add filtering by platform (YouTube/Reddit). Test that the history persists across sessions and deployments. **Goal:** Users can see what they've already analyzed without re-processing URLs.
 
-**Block 5: Test Deployed App** ✓
-POST a YouTube URL to the Railway endpoint and verify that transcript fetching works in production. Confirm that OpenAI summarization works in production and check that database persistence works across restarts. **Goal:** The full YouTube flow is working in production.
-
-**Block 6: Debug Duplicate Video Bug**
-Investigate why the first video POSTed works correctly, but subsequent videos return the original video's data instead of processing new ones. Trace through the request flow from UrlController → YoutubeService → database to identify where duplicate detection or caching is preventing new videos from being saved. Add logging if needed to see what's happening with each POST request. **Goal:** Every unique YouTube URL should be processed and saved correctly.
-
-**Block 7: Fix JSON Response Formatting**
-Figure out why JSON responses are pretty-printed in localhost but appear as one line in production. Research Spring Boot JSON formatting configuration and ensure production responses are human-readable. **Goal:** Production API responses should be formatted the same way as localhost.
-
-**Block 8: Other Issues (Buffer)**
-Debug any other deployment-specific errors that come up. Adjust Railway configuration as needed and handle any environment-specific bugs that only appear in production. **Goal:** A stable production deployment that reliably works.
-
-**Block 9: Production Usage**
-Start using the deployed app for real YouTube videos that I actually want to watch. Collect feedback on summary quality to see if the prompts need improvement. Document any issues or ideas for improvements. Plan what comes next whether that's Reddit API integration, better prompts, or maybe even a UI. **Goal:** Actually using the product I built instead of just building it.
+**Block 5: Deploy UI and Daily Usage**
+Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. Test the full flow in production: submit URL, see summary, check history. Use the app for at least 3 real YouTube videos to validate it solves the original problem. Document any UX issues or missing features for future improvements. **Goal:** Actually using the deployed web UI daily to decide which videos to watch.
 
 </details>
 
 ---
+
+<details>
+<summary><b>Tuesday Dec 30 (45 minutes)</b></summary>
+
+**What was planned:** Debug the duplicate video bug (Block 6) and fix JSON response formatting (Block 7).
+
+**What actually happened:** Discovered that the "duplicate video bug" was user error - was sending the same request body repeatedly instead of different URLs. Learned the distinction between request body and query parameters, understanding when to use each based on data complexity and special characters. Investigated JSON serialization and confirmed the API is working correctly - responses are proper JSON but appear minified in browsers without extensions. Discussed API design patterns including idempotency, REST conventions, and why POST with request body is appropriate for the /analyze endpoint. Identified that the real blocker to using the product is lack of UI, not bugs. Planned the Web UI Sprint with 5 specific blocks focused on building a usable interface.
+
+**What didn't finish:** Blocks 6 and 7 are complete (no actual bugs found). Haven't started UI development yet.
+
+**Next session:** Begin Block 1 by creating the HTML form page with URL input and submit button. Set up Spring Boot to serve static files.
+
+</details>
+
+---
+
+## Past Weeks
+
+<details>
+<summary><b>Week of Dec 29, 2025 - Jan 4, 2026: Railway Deployment Sprint (COMPLETE)</b></summary>
 
 <details>
 <summary><b>Monday Dec 29 (90 minutes total)</b></summary>

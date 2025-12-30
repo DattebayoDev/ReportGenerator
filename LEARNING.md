@@ -132,3 +132,22 @@ Encountered Java version compatibility issues when downgrading from Java 24 to J
 **When targeting a specific Java version (e.g., Java 17), why isn't it enough to just set the version in pom.xml - what else could break?**
 
 **If a method exists in newer Java versions but not in your target version, what are your options for achieving the same functionality?**
+
+### Tuesday Dec 30
+Debugged what I thought was a duplicate video bug but turned out to be user error - I was sending the same request body repeatedly. This led to discussing request body vs query parameters, URL encoding, JSON serialization, and API design patterns. Realized the real blocker to using the product was lack of UI, not bugs.
+
+**When designing a REST API endpoint that accepts user input, what are the main factors that determine whether to use query parameters vs request body?**
+
+**Why do URLs containing special characters like `?`, `&`, `#`, and `/` require URL encoding when sent as query parameters, and why is this error-prone?**
+
+**If you're building an API endpoint that accepts a URL as input, why is request body preferred over query parameters?**
+
+**What does it mean for an HTTP request to be "idempotent", and how does this concept influence whether an endpoint should use GET vs POST?**
+
+**If an endpoint sometimes creates new data (on first call) but sometimes just reads existing data (on subsequent calls with same input), should it use GET or POST, and why?**
+
+**When you see an SDK using a builder pattern like `Params.builder().field1(value).field2(value).build()` followed by `client.create(params)`, what HTTP method and request format is it most likely using under the hood?**
+
+**What is the difference between a server's responsibility (serializing data to JSON) and a client's responsibility (rendering/displaying that JSON) in web applications?**
+
+**If your API correctly returns JSON with Content-Type: application/json but it appears as one long line in the browser, is this a server bug or expected behavior?**
