@@ -38,7 +38,7 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 ---
 
 <details>
-<summary><b>Wednesday Dec 31 (30 minutes)</b></summary>
+<summary><b>Wednesday Dec 31 - Session 1 (30 minutes)</b></summary>
 
 **What was planned:** Begin Block 1 by creating the HTML form page with URL input and submit button. Set up Spring Boot to serve static files.
 
@@ -47,6 +47,19 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 **What didn't finish:** Block 1 is complete but the View Reports button has a bug to debug (intentional). Haven't wired the form to the /analyze API yet.
 
 **Next session:** Wire the Analyze button to the /analyze endpoint using the fetch() API. Debug the View Reports button behavior.
+
+</details>
+
+<details>
+<summary><b>Wednesday Dec 31 - Session 2 (60 minutes)</b></summary>
+
+**What was planned:** Wire the Analyze button to the /analyze endpoint using the fetch() API and debug the View Reports button behavior.
+
+**What actually happened:** Fixed the application.properties configuration issue that was causing static files to require app restarts. Discovered the file had been deleted and recreated it with proper cache settings. Debugged JavaScript code that had Java-style variable declarations and async timing issues. Learned the difference between const requiring an initializer versus Java's declaration syntax. Fixed multiple JavaScript errors including trying to call textContent as a function when it's a property, understanding that fetch is asynchronous so code outside the then callback executes before the response arrives, and debugging string escaping issues when trying to split by newline characters. Discovered that JSON.stringify on a string escapes the newlines making them unsplittable. Got the basic analyze flow working where clicking the button sends a request to the backend and displays the summary on the page. Planned to add radio button analysis modes to customize the LLM prompt but decided to implement that myself in the next session.
+
+**What didn't finish:** Block 2 is complete (form wired to API). Haven't implemented the radio button analysis modes yet for customizing prompts. The View Reports button bug still needs debugging. Haven't started Block 3 (display summary results with proper formatting).
+
+**Next session:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts. Fix the View Reports button navigation issue.
 
 </details>
 

@@ -153,7 +153,7 @@ Debugged what I thought was a duplicate video bug but turned out to be user erro
 **If your API correctly returns JSON with Content-Type: application/json but it appears as one long line in the browser, is this a server bug or expected behavior?**
 
 ### Wednesday Dec 31
-Started the Web UI sprint by creating the frontend scaffolding. Had to figure out where static files live in Spring Boot and how to enable live reload during development.
+Started the Web UI sprint by creating the frontend scaffolding. Had to figure out where static files live in Spring Boot and how to enable live reload during development. Debugged JavaScript async issues and learned about the difference between properties and methods in the DOM API.
 
 **In Spring Boot, what directory should static files (HTML, CSS, JS) be placed in for automatic serving without a controller?**
 
@@ -168,3 +168,19 @@ Started the Web UI sprint by creating the frontend scaffolding. Had to figure ou
 **When using `spring.web.resources.static-locations=file:path`, what determines whether the path resolves correctly?**
 
 **In HTML, what happens if you place a button with `type="submit"` inside a form element, and how does this affect button behavior?**
+
+**Why does `const` in JavaScript require an initializer (e.g., `const x;` is invalid) while `let` does not?**
+
+**What is the fundamental difference between `const`, `let`, and `var` in terms of reassignment and scope?**
+
+**When using `fetch()` in JavaScript, why can't you access the response data outside the `.then()` callback, even if you store it in a variable declared outside?**
+
+**What does "asynchronous execution" mean in JavaScript, and how does it affect the order in which code runs?**
+
+**In the JavaScript DOM API, what's the difference between `element.textContent` and a method like `element.appendChild()`?**
+
+**If you see a JavaScript error "X is not a function", what does that tell you about how you're trying to use X?**
+
+**In JavaScript strings, how do you represent a literal backslash character, and why does `'\n\'` cause a syntax error?**
+
+**When `JSON.stringify()` is applied to a string that contains newline characters (`\n`), what happens to those newlines?**
