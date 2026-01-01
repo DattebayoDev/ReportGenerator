@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AnalysisRequest;
 import com.example.demo.entity.Report;
 import com.example.demo.entity.Transcript;
-import com.example.demo.entity.UrlRequest;
 import com.example.demo.repository.ReportRepository;
 import com.example.demo.repository.TranscriptRepository;
-import com.example.demo.repository.UrlRepository;
 import com.example.demo.service.*;
 import io.github.thoroldvix.api.TranscriptRetrievalException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ public class UrlController {
 
     @Autowired
     private UrlDetector urlDetector;
-
-    @Autowired
-    private UrlRepository urlRepository;
 
     @Autowired
     private ReportRepository reportRepository;
@@ -46,13 +42,13 @@ public class UrlController {
     private ReportGenerator reportGenerator;
 
     @PostMapping("/analyze")
-    public Report postUrl(@RequestBody UrlRequest urlRequest) throws TranscriptRetrievalException {
+    public Report postUrl(@RequestBody AnalysisRequest analysisRequest) throws TranscriptRetrievalException {
         String postId;
-        String platform = urlDetector.detectPlatform(urlRequest.getUrl());
+        String platform = urlDetector.detectPlatform(analysisRequest.getUrl());
         if (Objects.equals(platform, "YOUTUBE")) {
-            postId = urlParser.parseYoutubeUrl(urlRequest.getUrl());
+            postId = urlParser.parseYoutubeUrl(analysisRequest.getUrl());
         } else {
-            postId = urlParser.parseRedditUrl(urlRequest.getUrl());
+            postId = urlParser.parseRedditUrl(analysisRequest.getUrl());
         }
 
         if (reportRepository.findByPostId(postId) != null) {
@@ -67,7 +63,7 @@ public class UrlController {
             report.setPlatform(platform);
             report.setTimestamp(LocalDateTime.now());
             transcript.setTranscriptText(youtubeService.getTranscript(postId).getTranscript());;
-            report.setSummary(llmService.summarize(transcript.getTranscriptText()));
+            report.setSummary(llmService.summarize(transcript.getTranscriptText(), analysisRequest.getArchetype(), analysisRequest.getCustomPrompt()));
             reportRepository.save(report);
             transcript.setReport(report);
             transcriptRepository.save(transcript);
@@ -108,10 +104,5 @@ public class UrlController {
     public List<Report> getReports(@RequestParam("website") String website) {
         String convertedPlatform = website.toUpperCase();
         return reportRepository.findAllByPlatform(convertedPlatform);
-    }
-
-    @GetMapping("/analyze")
-    public List<UrlRequest> getUrl() {
-        return urlRepository.findAll();
     }
 }

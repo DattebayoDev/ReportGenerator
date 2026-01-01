@@ -17,8 +17,39 @@
                 id="url-input"
                 name="url"
                 placeholder="https://www.youtube.com/watch?v=..."
+                value = "https://www.youtube.com/watch?v=2mA4vZeHp8o"
                 required
             >
+
+            <div class="archetype-section">
+                <label>Analysis Style:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="archetype" value="TWELVE_YEAR_OLD">
+                        12-Year-Old
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="archetype" value="ENTRY_LEVEL" checked>
+                        Entry Level
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="archetype" value="HIGH_LEVEL">
+                        High Level
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="archetype" value="CUSTOM">
+                        Custom
+                    </label>
+                </div>
+
+                <textarea
+                    id="custom-prompt"
+                    placeholder="Enter your custom analysis prompt here..."
+                    class="hidden"
+                    rows="3"
+                ></textarea>
+            </div>
+
             <button type="submit">Analyze</button>
             <button type="submit" onclick="window.location.href='reports.html'">View Reports</button>
         </form>
@@ -30,3 +61,5 @@
     <script src="app.js"></script>
 </body>
 </html>
+
+<!--value = "https://www.youtube.com/watch?v=2mA4vZeHp8o"-->

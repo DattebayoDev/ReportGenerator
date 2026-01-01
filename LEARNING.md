@@ -184,3 +184,22 @@ Started the Web UI sprint by creating the frontend scaffolding. Had to figure ou
 **In JavaScript strings, how do you represent a literal backslash character, and why does `'\n\'` cause a syntax error?**
 
 **When `JSON.stringify()` is applied to a string that contains newline characters (`\n`), what happens to those newlines?**
+
+### Thursday Jan 1
+Implemented analysis archetype feature allowing users to select different summarization styles (12-year-old, entry-level, high-level, custom). Designed the data contract between frontend and backend, created an enum for type safety, and wired the archetype through the service layer to customize LLM prompts.
+
+**In Spring MVC, how many `@RequestBody` parameters can a single controller method accept, and why does this constraint exist?**
+
+**When designing a DTO that combines multiple pieces of related input (like URL and analysis mode), what principle guides whether to create one combined DTO vs multiple separate parameters?**
+
+**What is the difference between a DTO (Data Transfer Object) and an Entity in Spring Boot/JPA applications, specifically regarding database persistence?**
+
+**When should you use Java enums for frontend-to-backend communication, and how does Jackson handle deserializing string values from JSON into Java enum constants?**
+
+**If you have logic that maps enum values to specific behavior (like TWELVE_YEAR_OLD → specific prompt text), where should that mapping logic live: controller, service, or utility class? What principle guides this decision?**
+
+**What is a switch expression in Java (introduced in Java 14), and how does it differ from a traditional switch statement in terms of returning values?**
+
+**When building a caching or lookup mechanism that checks if data already exists before processing, what happens when you add a new dimension to your data (e.g., same video with different analysis modes)? How does this affect your lookup key?**
+
+**If your database lookup uses only `postId` to check if a video was already analyzed, but now the same video can have multiple summaries (one per archetype), what architectural change is needed to the lookup logic?**

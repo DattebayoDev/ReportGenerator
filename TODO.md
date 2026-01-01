@@ -64,6 +64,19 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 </details>
 
 <details>
+<summary><b>Thursday Jan 1 (15 minutes)</b></summary>
+
+**What was planned:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts.
+
+**What actually happened:** Designed and implemented the full archetype feature end-to-end. Started by discussing the data contract design, deciding to create an AnalysisRequest DTO that combines URL and archetype fields rather than separate parameters, since Spring only allows one @RequestBody per endpoint. Created the AnalysisArchetype enum with four values (TWELVE_YEAR_OLD, ENTRY_LEVEL, HIGH_LEVEL, CUSTOM) and added it to a new enums package. Updated the frontend with radio buttons for archetype selection and a textarea that shows/hides when CUSTOM is selected. Modified app.js to send both archetype and customPrompt in the request body. On the backend, updated UrlController to accept AnalysisRequest instead of UrlRequest, and modified LlmService.summarize() to take archetype and customPrompt parameters. Created a private buildPrompt() method in LlmService using a switch expression to map each archetype to its specific prompt text, with fallback logic that uses ENTRY_LEVEL if CUSTOM is selected but customPrompt is empty. Tested the feature and confirmed it works - different archetypes produce different summaries. Discovered a caching bug where the lookup logic only checks postId, so re-analyzing the same video with a different archetype returns the cached summary instead of generating a new one. This will need fixing in a future session since the Report entity needs to track both postId and archetype for proper caching.
+
+**What didn't finish:** The caching logic bug remains unfixed - same video with different archetypes should produce multiple summaries but currently returns the first cached result. The View Reports button navigation issue is still unresolved. Haven't started Block 3 for displaying summary results with better formatting.
+
+**Next session:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists. May need to add archetype field to the Report entity and update the repository findBy methods.
+
+</details>
+
+<details>
 <summary><b>Tuesday Dec 30 (45 minutes)</b></summary>
 
 **What was planned:** Debug the duplicate video bug (Block 6) and fix JSON response formatting (Block 7).
