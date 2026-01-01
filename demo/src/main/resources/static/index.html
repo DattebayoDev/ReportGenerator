@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Report Generator</h1>
+        <p>Paste a YouTube URL to get a summary</p>
+
+        <form id="analyze-form">
+            <input
+                type="text"
+                id="url-input"
+                name="url"
+                placeholder="https://www.youtube.com/watch?v=..."
+                required
+            >
+            <button type="submit">Analyze</button>
+            <button type="submit" onclick="window.location.href='reports.html'">View Reports</button>
+        </form>
+
+        <div id="result" class="result hidden"></div>
+        <div id="error" class="error hidden"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -9,8 +9,8 @@
 **Status:** Railway deployment complete. API works but not usable without UI. Building web interface to make the tool actually usable.
 
 **Web UI Blocks:**
-- **Block 1: Create HTML Form Page** ← Next
-- **Block 2: Wire Form to /analyze API**
+- **Block 1: Create HTML Form Page** ✓
+- **Block 2: Wire Form to /analyze API** ← Next
 - **Block 3: Display Summary Results**
 - **Block 4: Add Reports History View**
 - **Block 5: Deploy UI and Daily Usage**
@@ -36,6 +36,19 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 </details>
 
 ---
+
+<details>
+<summary><b>Wednesday Dec 31 (30 minutes)</b></summary>
+
+**What was planned:** Begin Block 1 by creating the HTML form page with URL input and submit button. Set up Spring Boot to serve static files.
+
+**What actually happened:** Created the frontend scaffolding with index.html, style.css, and app.js in the resources/static directory. Discussed the trade-offs between keeping frontend and backend in the same project vs separate repositories, concluding that same-project is simpler for basic HTML/CSS/JS since it avoids CORS configuration and multiple deployments. Added a "View Reports" button alongside the Analyze button to navigate to a future reports page. Configured spring.web.resources.static-locations to enable live reload of static files during development without restarting the application. Debugged a 404 error caused by the file path being relative to the working directory.
+
+**What didn't finish:** Block 1 is complete but the View Reports button has a bug to debug (intentional). Haven't wired the form to the /analyze API yet.
+
+**Next session:** Wire the Analyze button to the /analyze endpoint using the fetch() API. Debug the View Reports button behavior.
+
+</details>
 
 <details>
 <summary><b>Tuesday Dec 30 (45 minutes)</b></summary>

@@ -151,3 +151,20 @@ Debugged what I thought was a duplicate video bug but turned out to be user erro
 **What is the difference between a server's responsibility (serializing data to JSON) and a client's responsibility (rendering/displaying that JSON) in web applications?**
 
 **If your API correctly returns JSON with Content-Type: application/json but it appears as one long line in the browser, is this a server bug or expected behavior?**
+
+### Wednesday Dec 31
+Started the Web UI sprint by creating the frontend scaffolding. Had to figure out where static files live in Spring Boot and how to enable live reload during development.
+
+**In Spring Boot, what directory should static files (HTML, CSS, JS) be placed in for automatic serving without a controller?**
+
+**Spring Boot auto-configures a resource handler that maps `/**` to which classpath locations for static files?**
+
+**When deciding whether to keep frontend and backend in the same project vs separate repositories, what are the key trade-offs to consider?**
+
+**For a simple HTML/CSS/JS frontend that calls your API, why is same-project simpler than separate projects?**
+
+**What Spring Boot property allows static files to reload on browser refresh without restarting the application, and how does it work?**
+
+**When using `spring.web.resources.static-locations=file:path`, what determines whether the path resolves correctly?**
+
+**In HTML, what happens if you place a button with `type="submit"` inside a form element, and how does this affect button behavior?**
