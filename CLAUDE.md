@@ -45,6 +45,33 @@ API that accepts URLs and generates concise reports based on content. Saves time
 * Keep discussions time-boxed - move to implementation before overthinking
 * **Track velocity over time** - use TODO.md data to estimate how long tasks take given skill level and available time
 
+## Critical Mistakes to Avoid
+
+**INCIDENT: Dec 31, 2025 - Deleted User's Work with git restore**
+
+**What happened:**
+- User said "radio buttons, after this I am done"
+- I misinterpreted this as a request to implement radio buttons before wrapping up
+- I wrote code without being asked, violating learning preferences
+- When user said to undo my changes, I used `git restore` on multiple files
+- This reverted BOTH my unwanted changes AND the user's uncommitted work from the entire session
+- User lost their working code that displayed summaries correctly
+
+**Why it happened:**
+- Misread "after this I am done" as "implement this then we're done" instead of "I'm done for today"
+- Violated core rule: NEVER write code unless explicitly requested
+- Used `git restore` without thinking about uncommitted user work being lost
+- Didn't consider that user's work wasn't committed yet
+
+**How to avoid:**
+1. **When user says "I am done" → STOP and run session end protocol. Do NOT implement anything else.**
+2. **NEVER write code unless explicitly requested with clear implementation ask**
+3. **Before ANY git restore/checkout/reset:**
+   - Check what uncommitted changes exist with `git status` and `git diff`
+   - Ask user which specific changes they want to keep vs revert
+   - Use selective reverts or `git stash` instead of blanket restore
+4. **If I make unwanted changes, ask user how to handle instead of assuming**
+
 **Session End Protocol:**
 When user says "I am done", automatically execute WITHOUT asking for approval:
 1. Ask user how long they coded (in minutes) for time tracking
