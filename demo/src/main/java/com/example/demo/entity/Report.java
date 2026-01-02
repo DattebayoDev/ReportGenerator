@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 
+import com.example.demo.enums.AnalysisArchetype;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,9 @@ public class Report {
 
     private String postId;
     private String platform;
+
+    @Enumerated(EnumType.STRING)
+    private AnalysisArchetype archetype;
 
     @Column(columnDefinition = "TEXT")
     private String summary;

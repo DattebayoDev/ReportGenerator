@@ -64,7 +64,7 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 </details>
 
 <details>
-<summary><b>Thursday Jan 1 (15 minutes)</b></summary>
+<summary><b>Thursday Jan 1 - Session 1 (45 minutes)</b></summary>
 
 **What was planned:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts.
 
@@ -73,6 +73,19 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 **What didn't finish:** The caching logic bug remains unfixed - same video with different archetypes should produce multiple summaries but currently returns the first cached result. The View Reports button navigation issue is still unresolved. Haven't started Block 3 for displaying summary results with better formatting.
 
 **Next session:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists. May need to add archetype field to the Report entity and update the repository findBy methods.
+
+</details>
+
+<details>
+<summary><b>Thursday Jan 1 - Session 2 (20 minutes)</b></summary>
+
+**What was planned:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists, adding archetype field to the Report entity and updating the repository findBy methods.
+
+**What actually happened:** Started by discussing database migration strategies and the implications of adding a new column to an existing table with data. Learned about the distinction between side projects with test data versus production systems, and when it's acceptable to let ddl-auto handle schema changes versus using explicit migration tools like Flyway or Liquibase. Fixed the caching bug by adding an archetype field to the Report entity with the @Enumerated annotation set to EnumType.STRING to store the enum name rather than its ordinal position. Created a new findByPostIdAndArchetype method in ReportRepository that generates a composite key lookup using Spring Data JPA's method naming convention. Updated UrlController to check both postId and archetype in the lookup logic on line 54, and modified the report creation logic to set the archetype field for both YouTube and Reddit reports. Tested the fix and confirmed that analyzing the same video with different archetypes now generates fresh summaries instead of returning cached results. Discovered through testing that videos without transcripts cause errors, and identified future work items including adding a loading indicator for the UI and sourcing comments from YouTube and Reddit for more comprehensive analysis.
+
+**What didn't finish:** The View Reports button navigation issue remains unresolved. Haven't started Block 3 for displaying summary results with better formatting. Need to handle videos without transcripts gracefully with error messages or fallback behavior. Loading indicator for UI not implemented yet. Comment sourcing feature not started.
+
+**Next session:** Continue with UI improvements, potentially implementing the loading indicator or fixing the View Reports button navigation issue.
 
 </details>
 

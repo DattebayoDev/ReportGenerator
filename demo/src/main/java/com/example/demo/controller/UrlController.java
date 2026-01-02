@@ -51,8 +51,8 @@ public class UrlController {
             postId = urlParser.parseRedditUrl(analysisRequest.getUrl());
         }
 
-        if (reportRepository.findByPostId(postId) != null) {
-            return reportRepository.getByPostId(postId);
+        if (reportRepository.findByPostIdAndArchetype(postId, analysisRequest.getArchetype()) != null) {
+            return reportRepository.findByPostIdAndArchetype(postId, analysisRequest.getArchetype());
         }
 
         Report report = new Report();
@@ -61,6 +61,7 @@ public class UrlController {
         if (Objects.equals(platform, "YOUTUBE")) {
             report.setPostId(postId);
             report.setPlatform(platform);
+            report.setArchetype(analysisRequest.getArchetype());
             report.setTimestamp(LocalDateTime.now());
             transcript.setTranscriptText(youtubeService.getTranscript(postId).getTranscript());;
             report.setSummary(llmService.summarize(transcript.getTranscriptText(), analysisRequest.getArchetype(), analysisRequest.getCustomPrompt()));
@@ -70,6 +71,7 @@ public class UrlController {
         } else if (Objects.equals(platform, "REDDIT")) {
             report.setPostId(postId);
             report.setPlatform(platform);
+            report.setArchetype(analysisRequest.getArchetype());
             report.setSummary(reportGenerator.generateRedditReport(redditService.getData()));
             report.setTimestamp(LocalDateTime.now());
             reportRepository.save(report);
