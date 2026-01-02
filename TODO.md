@@ -6,36 +6,78 @@
 
 ## Week of Dec 30, 2025 - Jan 5, 2026: Web UI Sprint
 
-**Status:** Railway deployment complete. API works but not usable without UI. Building web interface to make the tool actually usable.
+**Status:** Basic web UI working - can submit URLs, select archetype mode, and view summaries. Need to polish UX and add reports history.
 
 **Web UI Blocks:**
-- **Block 1: Create HTML Form Page** ✓
-- **Block 2: Wire Form to /analyze API** ← Next
-- **Block 3: Display Summary Results**
-- **Block 4: Add Reports History View**
-- **Block 5: Deploy UI and Daily Usage**
+- **Block 1: HTML form with URL input and archetype selection** ✓
+- **Block 2: Wire form to /analyze endpoint and display summary** ✓
+- **Block 3: Fix View Reports button and build reports history page** ← Next
+- **Block 4: Deploy updated UI to Railway and test in production**
+
+**Future Work:**
+- Add loading indicator/spinner for LLM analysis
+- Handle videos without transcripts (error message/fallback)
+- Source and analyze YouTube/Reddit comments
 
 <details>
 <summary><b>Block Details</b></summary>
 
-**Block 1: Create HTML Form Page**
-Create an index.html file with a simple form that has a text input for YouTube URLs and a submit button. Set up Spring Boot to serve static files from the resources/static directory. Add basic CSS to make it not look terrible. Test that visiting the root URL shows the form. **Goal:** A functional HTML page with a URL input form that loads when you visit the app.
+**Block 1: HTML form with URL input and archetype selection** ✓
+Created index.html with URL input field, archetype radio buttons (TWELVE_YEAR_OLD, ENTRY_LEVEL, HIGH_LEVEL, CUSTOM), and custom prompt textarea that shows/hides based on selection. Added basic CSS styling. Configured Spring Boot to serve static files from resources/static. Added View Reports button (currently broken). **Completed:** Dec 31 sessions.
 
-**Block 2: Wire Form to /analyze API**
-Add JavaScript to handle form submission. Prevent default form behavior and instead make a POST request to /analyze endpoint with the URL in the request body. Handle loading state while waiting for the API response. Add basic error handling for failed requests or invalid URLs. **Goal:** Clicking submit sends the URL to the backend and receives a response.
+**Block 2: Wire form to /analyze endpoint and display summary** ✓
+Implemented JavaScript fetch() call to POST URL and archetype to /analyze endpoint. Backend accepts AnalysisRequest DTO with url, archetype, and customPrompt fields. Summary response displays on page after analysis completes. Fixed caching bug by adding archetype to Report entity and updating lookup logic to check both postId and archetype (findByPostIdAndArchetype). Tested with multiple videos and different archetypes - works correctly. **Completed:** Dec 31 and Jan 1 sessions.
 
-**Block 3: Display Summary Results**
-Parse the JSON response from /analyze and display the summary on the page. Show the video title, platform, timestamp, and summary text in a clean layout. Add a loading spinner while analysis is in progress. Handle edge cases like videos without transcripts or API errors. **Goal:** Users see the summary immediately after submitting a URL without needing to check JSON in browser tools.
+**Block 3: Fix View Reports button and build reports history page**
+Debug View Reports button navigation issue. Create reports.html page that fetches GET /reports and displays all previously analyzed videos in a table/list format. Show postId, platform, archetype, timestamp, and summary preview. Add ability to click a report to see full details. Consider adding filtering by platform or archetype. **Goal:** Users can review past analyses without re-processing URLs.
 
-**Block 4: Add Reports History View**
-Create a second page or section that calls GET /reports and displays all previously analyzed videos. Show a table or list with video ID, platform, timestamp, and a link to view the full summary. Add filtering by platform (YouTube/Reddit). Test that the history persists across sessions and deployments. **Goal:** Users can see what they've already analyzed without re-processing URLs.
-
-**Block 5: Deploy UI and Daily Usage**
-Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. Test the full flow in production: submit URL, see summary, check history. Use the app for at least 3 real YouTube videos to validate it solves the original problem. Document any UX issues or missing features for future improvements. **Goal:** Actually using the deployed web UI daily to decide which videos to watch.
+**Block 4: Deploy updated UI to Railway and test in production**
+Push HTML/CSS/JS changes to GitHub and verify Railway auto-deploys correctly. Test full flow in production with real YouTube videos. Use the app for at least 3 videos to validate it solves the original problem of deciding whether content is worth consuming. Document bugs or UX improvements discovered during real usage. **Goal:** Daily-usable web app deployed and tested with real content.
 
 </details>
 
 ---
+
+## Session History
+
+<details>
+<summary><b>Thursday Jan 1 - Session 2 (20 minutes)</b></summary>
+
+**What was planned:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists, adding archetype field to the Report entity and updating the repository findBy methods.
+
+**What actually happened:** Started by discussing database migration strategies and the implications of adding a new column to an existing table with data. Learned about the distinction between side projects with test data versus production systems, and when it's acceptable to let ddl-auto handle schema changes versus using explicit migration tools like Flyway or Liquibase. Fixed the caching bug by adding an archetype field to the Report entity with the @Enumerated annotation set to EnumType.STRING to store the enum name rather than its ordinal position. Created a new findByPostIdAndArchetype method in ReportRepository that generates a composite key lookup using Spring Data JPA's method naming convention. Updated UrlController to check both postId and archetype in the lookup logic on line 54, and modified the report creation logic to set the archetype field for both YouTube and Reddit reports. Tested the fix and confirmed that analyzing the same video with different archetypes now generates fresh summaries instead of returning cached results. Discovered through testing that videos without transcripts cause errors, and identified future work items including adding a loading indicator for the UI and sourcing comments from YouTube and Reddit for more comprehensive analysis.
+
+**What didn't finish:** The View Reports button navigation issue remains unresolved. Need to handle videos without transcripts gracefully with error messages or fallback behavior. Loading indicator for UI not implemented yet. Comment sourcing feature not started.
+
+**Next session:** Fix the View Reports button and build the reports history page.
+
+</details>
+
+<details>
+<summary><b>Thursday Jan 1 - Session 1 (45 minutes)</b></summary>
+
+**What was planned:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts.
+
+**What actually happened:** Designed and implemented the full archetype feature end-to-end. Started by discussing the data contract design, deciding to create an AnalysisRequest DTO that combines URL and archetype fields rather than separate parameters, since Spring only allows one @RequestBody per endpoint. Created the AnalysisArchetype enum with four values (TWELVE_YEAR_OLD, ENTRY_LEVEL, HIGH_LEVEL, CUSTOM) and added it to a new enums package. Updated the frontend with radio buttons for archetype selection and a textarea that shows/hides when CUSTOM is selected. Modified app.js to send both archetype and customPrompt in the request body. On the backend, updated UrlController to accept AnalysisRequest instead of UrlRequest, and modified LlmService.summarize() to take archetype and customPrompt parameters. Created a private buildPrompt() method in LlmService using a switch expression to map each archetype to its specific prompt text, with fallback logic that uses ENTRY_LEVEL if CUSTOM is selected but customPrompt is empty. Tested the feature and confirmed it works - different archetypes produce different summaries. Discovered a caching bug where the lookup logic only checks postId, so re-analyzing the same video with a different archetype returns the cached summary instead of generating a new one. This will need fixing in a future session since the Report entity needs to track both postId and archetype for proper caching.
+
+**What didn't finish:** The caching logic bug remains unfixed - same video with different archetypes should produce multiple summaries but currently returns the first cached result. The View Reports button navigation issue is still unresolved.
+
+**Next session:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists. May need to add archetype field to the Report entity and update the repository findBy methods.
+
+</details>
+
+<details>
+<summary><b>Wednesday Dec 31 - Session 2 (60 minutes)</b></summary>
+
+**What was planned:** Wire the Analyze button to the /analyze endpoint using the fetch() API and debug the View Reports button behavior.
+
+**What actually happened:** Fixed the application.properties configuration issue that was causing static files to require app restarts. Discovered the file had been deleted and recreated it with proper cache settings. Debugged JavaScript code that had Java-style variable declarations and async timing issues. Learned the difference between const requiring an initializer versus Java's declaration syntax. Fixed multiple JavaScript errors including trying to call textContent as a function when it's a property, understanding that fetch is asynchronous so code outside the then callback executes before the response arrives, and debugging string escaping issues when trying to split by newline characters. Discovered that JSON.stringify on a string escapes the newlines making them unsplittable. Got the basic analyze flow working where clicking the button sends a request to the backend and displays the summary on the page. Planned to add radio button analysis modes to customize the LLM prompt but decided to implement that myself in the next session.
+
+**What didn't finish:** Block 2 is complete (form wired to API). Haven't implemented the radio button analysis modes yet for customizing prompts. The View Reports button bug still needs debugging.
+
+**Next session:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts. Fix the View Reports button navigation issue.
+
+</details>
 
 <details>
 <summary><b>Wednesday Dec 31 - Session 1 (30 minutes)</b></summary>
@@ -47,32 +89,6 @@ Push the HTML/CSS/JS files to GitHub and verify Railway deploys them correctly. 
 **What didn't finish:** Block 1 is complete but the View Reports button has a bug to debug (intentional). Haven't wired the form to the /analyze API yet.
 
 **Next session:** Wire the Analyze button to the /analyze endpoint using the fetch() API. Debug the View Reports button behavior.
-
-</details>
-
-<details>
-<summary><b>Wednesday Dec 31 - Session 2 (60 minutes)</b></summary>
-
-**What was planned:** Wire the Analyze button to the /analyze endpoint using the fetch() API and debug the View Reports button behavior.
-
-**What actually happened:** Fixed the application.properties configuration issue that was causing static files to require app restarts. Discovered the file had been deleted and recreated it with proper cache settings. Debugged JavaScript code that had Java-style variable declarations and async timing issues. Learned the difference between const requiring an initializer versus Java's declaration syntax. Fixed multiple JavaScript errors including trying to call textContent as a function when it's a property, understanding that fetch is asynchronous so code outside the then callback executes before the response arrives, and debugging string escaping issues when trying to split by newline characters. Discovered that JSON.stringify on a string escapes the newlines making them unsplittable. Got the basic analyze flow working where clicking the button sends a request to the backend and displays the summary on the page. Planned to add radio button analysis modes to customize the LLM prompt but decided to implement that myself in the next session.
-
-**What didn't finish:** Block 2 is complete (form wired to API). Haven't implemented the radio button analysis modes yet for customizing prompts. The View Reports button bug still needs debugging. Haven't started Block 3 (display summary results with proper formatting).
-
-**Next session:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts. Fix the View Reports button navigation issue.
-
-</details>
-
-<details>
-<summary><b>Thursday Jan 1 (15 minutes)</b></summary>
-
-**What was planned:** Implement radio button UI for analysis modes and wire them through backend to LlmService to customize prompts.
-
-**What actually happened:** Designed and implemented the full archetype feature end-to-end. Started by discussing the data contract design, deciding to create an AnalysisRequest DTO that combines URL and archetype fields rather than separate parameters, since Spring only allows one @RequestBody per endpoint. Created the AnalysisArchetype enum with four values (TWELVE_YEAR_OLD, ENTRY_LEVEL, HIGH_LEVEL, CUSTOM) and added it to a new enums package. Updated the frontend with radio buttons for archetype selection and a textarea that shows/hides when CUSTOM is selected. Modified app.js to send both archetype and customPrompt in the request body. On the backend, updated UrlController to accept AnalysisRequest instead of UrlRequest, and modified LlmService.summarize() to take archetype and customPrompt parameters. Created a private buildPrompt() method in LlmService using a switch expression to map each archetype to its specific prompt text, with fallback logic that uses ENTRY_LEVEL if CUSTOM is selected but customPrompt is empty. Tested the feature and confirmed it works - different archetypes produce different summaries. Discovered a caching bug where the lookup logic only checks postId, so re-analyzing the same video with a different archetype returns the cached summary instead of generating a new one. This will need fixing in a future session since the Report entity needs to track both postId and archetype for proper caching.
-
-**What didn't finish:** The caching logic bug remains unfixed - same video with different archetypes should produce multiple summaries but currently returns the first cached result. The View Reports button navigation issue is still unresolved. Haven't started Block 3 for displaying summary results with better formatting.
-
-**Next session:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists. May need to add archetype field to the Report entity and update the repository findBy methods.
 
 </details>
 

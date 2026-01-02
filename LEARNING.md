@@ -203,3 +203,36 @@ Implemented analysis archetype feature allowing users to select different summar
 **When building a caching or lookup mechanism that checks if data already exists before processing, what happens when you add a new dimension to your data (e.g., same video with different analysis modes)? How does this affect your lookup key?**
 
 **If your database lookup uses only `postId` to check if a video was already analyzed, but now the same video can have multiple summaries (one per archetype), what architectural change is needed to the lookup logic?**
+
+**What is the difference between `file:` and `classpath:` resource protocols in Spring Boot, and when should you use each?**
+
+**When deploying a Spring Boot app to a cloud platform like Railway or Heroku, why does `spring.web.resources.static-locations=file:...` fail to serve static files?**
+
+**How does Spring Boot package applications for production deployment, and why does this affect how static resources are accessed?**
+
+**What is Spring Boot's default location for serving static files (HTML, CSS, JS) without any configuration overrides?**
+
+**If static files work locally but return 404 in production, and you have a `spring.web.resources.static-locations` override using `file:`, what's likely the problem?**
+
+### Thursday Jan 2
+Fixed the caching bug where analyzing the same video with different archetypes returned cached results instead of generating new summaries. Added archetype field to Report entity and updated lookup logic to check both postId and archetype. Discussed database migration strategies and when to use explicit migrations versus ddl-auto in production.
+
+**When JPA encounters a custom Java enum type as an entity field, what annotation is required to specify how it should be stored in the database?**
+
+**What does `@Enumerated(EnumType.STRING)` tell JPA to do when storing an enum value in the database?**
+
+**What does `@Enumerated(EnumType.ORDINAL)` store in the database, and why is this dangerous for long-term maintenance?**
+
+**If you have an enum with values [A, B, C, D] stored using EnumType.ORDINAL, and you later reorder it to [A, X, B, C, D], what happens to existing database records that stored "B" as 1?**
+
+**Why do experienced developers always explicitly use `@Enumerated(EnumType.STRING)` instead of relying on JPA's default behavior?**
+
+**When adding a new column to an existing database table in production with real user data, why can't you just rely on `spring.jpa.hibernate.ddl-auto=update`?**
+
+**What are Flyway and Liquibase, and what problem do they solve that ddl-auto doesn't?**
+
+**When adding a nullable column to a table with existing rows, what value will existing rows contain for that new column after the migration runs?**
+
+**If you add a new field to an entity and need to support old records that don't have that field populated, what are your options for handling null values in application code?**
+
+**In a small side project with test data versus a production system with real users, how does this context change your approach to database schema changes?**
