@@ -17,6 +17,12 @@ body {
     padding: 20px;
 }
 
+.container-wide {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
 h1 { margin-bottom: 8px; }
 p { color: #666; margin-bottom: 24px; }
 
@@ -102,3 +108,82 @@ button:disabled { background-color: #ccc; cursor: not-allowed; }
 .error { background: #fee; border: 1px solid #fcc; color: #c00; }
 
 .hidden { display: none; }
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin: 20px 0;
+}
+
+thead {
+    background-color: #f8f9fa;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #dee2e6;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    min-height: 50px;
+    vertical-align: top;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Column widths */
+#reportsTable th:nth-child(1),
+#reportsTable td:nth-child(1) {
+    width: 25%;
+}
+
+#reportsTable th:nth-child(2),
+#reportsTable td:nth-child(2) {
+    width: 15%;
+}
+
+#reportsTable th:nth-child(3),
+#reportsTable td:nth-child(3) {
+    width: 45%;
+}
+
+#reportsTable th:nth-child(4),
+#reportsTable td:nth-child(4) {
+    width: 15%;
+}
+
+/* URL styling */
+#reportsTable a {
+    color: #007bff;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+#reportsTable a:hover {
+    text-decoration: underline;
+}
+
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+/* Loading indicator */
+.loading {
+    padding: 16px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin: 16px 0;
+}

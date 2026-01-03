@@ -3,6 +3,7 @@ const urlInput = document.getElementById('url-input');
 const resultDiv = document.getElementById('result');
 const errorDiv = document.getElementById('error');
 const customPromptTextarea = document.getElementById('custom-prompt');
+const loadingDiv = document.getElementById('loading');
 
 // Show/hide custom prompt textarea based on radio selection
 document.querySelectorAll('input[name="archetype"]').forEach(radio => {
@@ -25,7 +26,12 @@ form.addEventListener('submit', function(event) {
     console.log('Submitting URL:', url);
     console.log('Archetype:', archetype);
     console.log('Custom Prompt:', customPrompt);
-
+    console.log(1)
+    // Show loading, hide previous results
+    loadingDiv.classList.remove('hidden');
+    resultDiv.classList.add('hidden');
+    errorDiv.classList.add('hidden');
+    console.log('removed')
     fetch('/analyze', {
         method: 'POST',
         headers: {
@@ -44,6 +50,7 @@ form.addEventListener('submit', function(event) {
         return response.json();
     })
     .then(data => {
+        loadingDiv.classList.add('hidden');
         summary = (data.summary).split('\n');
         resultDiv.textContent = summary;
         errorDiv.classList.add('hidden');

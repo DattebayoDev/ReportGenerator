@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-wide">
+        <h1>Analysis History</h1>
+
+        <div id="loading-reports" class="loading">Loading reports...</div>
+
+        <table id="reportsTable" class="hidden">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Archetype</th>
+                    <th>Summary</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="reportTableBody">
+                <!-- Reports will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+
+        <div class="button-group">
+            <button onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </div>
+
+    <script src="reports.js"></script>
+</body>
+</html>

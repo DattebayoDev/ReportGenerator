@@ -25,7 +25,7 @@ public class LlmService {
         String prompt = buildPrompt(archetype, customPrompt);
 
         ResponseCreateParams params = ResponseCreateParams.builder()
-        .input(prompt + transcript)
+        .input(prompt + transcript + "Only give me the summary, not your response. No Filler. ")
         .model(ChatModel.GPT_4_1)
         .build();
 

@@ -236,3 +236,34 @@ Fixed the caching bug where analyzing the same video with different archetypes r
 **If you add a new field to an entity and need to support old records that don't have that field populated, what are your options for handling null values in application code?**
 
 **In a small side project with test data versus a production system with real users, how does this context change your approach to database schema changes?**
+
+### Thursday Jan 2
+Built the reports history page from scratch. Created a table that fetches and displays all analyzed reports on page load. Ran into browser caching issues where JavaScript changes weren't appearing despite restarting Spring Boot and running mvn clean package. Learned about the multiple caching layers between code and browser.
+
+**When developing a web application, what are the three main caching layers that can prevent your code changes from appearing in the browser?**
+
+**If you modify a JavaScript file and restart your Spring Boot application, but the browser still shows old code in DevTools Sources tab, which caching layer is the culprit?**
+
+**What is the difference between a normal browser refresh (F5) and a hard refresh (Ctrl+F5 or Ctrl+Shift+R) in terms of cache behavior?**
+
+**In Chrome DevTools Network tab, what does the "Disable cache" checkbox do, and when is it most useful?**
+
+**During local development, does Spring Boot serve static files from the compiled JAR or directly from src/main/resources/static? How does this differ from production deployment?**
+
+**If you're making frontend changes (HTML/CSS/JS) during development, do you need to run mvn clean package for those changes to appear, or is restarting the Spring Boot application sufficient?**
+
+**What is the window.onload event in JavaScript, and when does it fire during the page lifecycle?**
+
+**What is the difference between window.onload and DOMContentLoaded events in terms of what they wait for before firing?**
+
+**When implementing a loading indicator for data that loads asynchronously, what is the typical state management pattern (what gets shown/hidden and when)?**
+
+**In CSS, what does border-collapse: collapse do for HTML tables, and how does it differ from the default border-collapse: separate?**
+
+**When styling specific columns in an HTML table, what CSS selector allows you to target the 3rd column without adding classes to every cell?**
+
+**If you want to prevent long URLs from breaking your table layout, what CSS property forces text to wrap even in the middle of words?**
+
+**When a browser caches static assets like JavaScript files, what HTTP headers from the server control how long the browser keeps that cached version?**
+
+**Why might browser caching be more aggressive for .js and .css files compared to .html files?**

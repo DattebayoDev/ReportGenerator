@@ -6,18 +6,18 @@
 
 ## Week of Dec 30, 2025 - Jan 5, 2026: Web UI Sprint
 
-**Status:** Basic web UI working - can submit URLs, select archetype mode, and view summaries. Need to polish UX and add reports history.
+**Status:** Web UI complete with reports history page! Can submit URLs, select archetype mode, view summaries, and browse all past analyses in a table. Ready for Railway deployment.
 
 **Web UI Blocks:**
 - **Block 1: HTML form with URL input and archetype selection** ✓
 - **Block 2: Wire form to /analyze endpoint and display summary** ✓
-- **Block 3: Fix View Reports button and build reports history page** ← Next
-- **Block 4: Deploy updated UI to Railway and test in production**
+- **Block 3: Fix View Reports button and build reports history page** ✓
+- **Block 4: Deploy updated UI to Railway and test in production** ← Next
 
 **Future Work:**
-- Add loading indicator/spinner for LLM analysis
 - Handle videos without transcripts (error message/fallback)
 - Source and analyze YouTube/Reddit comments
+- Improve View Reports button (use event listener instead of onclick)
 
 <details>
 <summary><b>Block Details</b></summary>
@@ -28,8 +28,8 @@ Created index.html with URL input field, archetype radio buttons (TWELVE_YEAR_OL
 **Block 2: Wire form to /analyze endpoint and display summary** ✓
 Implemented JavaScript fetch() call to POST URL and archetype to /analyze endpoint. Backend accepts AnalysisRequest DTO with url, archetype, and customPrompt fields. Summary response displays on page after analysis completes. Fixed caching bug by adding archetype to Report entity and updating lookup logic to check both postId and archetype (findByPostIdAndArchetype). Tested with multiple videos and different archetypes - works correctly. **Completed:** Dec 31 and Jan 1 sessions.
 
-**Block 3: Fix View Reports button and build reports history page**
-Debug View Reports button navigation issue. Create reports.html page that fetches GET /reports and displays all previously analyzed videos in a table/list format. Show postId, platform, archetype, timestamp, and summary preview. Add ability to click a report to see full details. Consider adding filtering by platform or archetype. **Goal:** Users can review past analyses without re-processing URLs.
+**Block 3: Fix View Reports button and build reports history page** ✓
+Created reports.html with a table that displays URL (reconstructed from postId and platform), archetype, summary, and timestamp. Implemented reports.js that fetches GET /reports on window.onload and populates the table dynamically. Added Excel-like table styling with border-collapse for clean grid lines, relative column widths (URL 25%, Archetype 15%, Summary 45%, Timestamp 15%), and hover effects on rows. Implemented loading indicators for both the analyze flow ("Analyzing...") and reports page ("Loading reports...") to provide user feedback during async operations. Debugged browser caching issues where JavaScript changes weren't appearing despite server restarts - learned about the multiple caching layers (Spring Boot, browser, IDE) and used DevTools "Disable cache" as the practical development solution. **Completed:** Jan 2 session.
 
 **Block 4: Deploy updated UI to Railway and test in production**
 Push HTML/CSS/JS changes to GitHub and verify Railway auto-deploys correctly. Test full flow in production with real YouTube videos. Use the app for at least 3 videos to validate it solves the original problem of deciding whether content is worth consuming. Document bugs or UX improvements discovered during real usage. **Goal:** Daily-usable web app deployed and tested with real content.
@@ -39,6 +39,19 @@ Push HTML/CSS/JS changes to GitHub and verify Railway auto-deploys correctly. Te
 ---
 
 ## Session History
+
+<details>
+<summary><b>Thursday Jan 2 (50 minutes)</b></summary>
+
+**What was planned:** Fix the View Reports button and build the reports history page (Block 3).
+
+**What actually happened:** Created the complete reports history feature from scratch. Started by designing the reports.html page with a table structure containing columns for URL, archetype, summary, and timestamp. Built reports.js to fetch all reports from the GET /reports endpoint using window.onload to trigger the data fetch immediately when the page loads, eliminating the need for a button click. Implemented the displayReports function to dynamically populate the table by iterating through the response data, reconstructing full YouTube/Reddit URLs from the stored postId and platform fields, and formatting timestamps using JavaScript's Date API. Added comprehensive table styling to style.css including border-collapse for Excel-like grid appearance, relative column widths to prevent the summary column from dominating the layout, min-height for rows, and hover effects for better UX. Created a wider container class for the reports page since the table needs more horizontal space than the narrow analyze form. Implemented loading indicators for both pages by adding "Analyzing..." text that appears below the radio buttons on the index page when the user clicks Analyze, and "Loading reports..." text that shows on the reports page while data is being fetched, with proper state management to show loading and hide content during async operations then swap visibility when data arrives. Encountered a significant browser caching issue where JavaScript changes weren't reflecting in the browser despite restarting Spring Boot and running mvn clean package. Debugged systematically by checking DevTools Sources tab to confirm the browser was serving stale JS files, learning that there are three caching layers (Spring Boot cache, browser cache, IDE cache) and that the browser cache was the culprit. Discovered that DevTools "Disable cache" checkbox in the Network tab forces the browser to fetch fresh files on every request, which is the practical solution for local development rather than overengineering with HTTP cache headers or version strings. Confirmed that Spring Boot serves static files directly from src/main/resources/static during development (not from the JAR), so file changes should appear after server restart, but browser caching can still interfere. Tested both pages and verified that the reports table displays correctly with all data, URLs are clickable and open in new tabs, loading indicators appear and disappear at the right times, and the table styling matches the Excel-like design requirements.
+
+**What didn't finish:** There's some test data in index.html (like "sfsdf" text and modified button labels) that should be cleaned up before deployment. The View Reports button functionality works, but the implementation could be improved (currently uses onclick in HTML instead of a proper event listener in JavaScript). Block 4 (Railway deployment) hasn't started yet.
+
+**Next session:** Clean up test data from index.html, then deploy the updated UI to Railway and test the full application in production with real YouTube videos.
+
+</details>
 
 <details>
 <summary><b>Thursday Jan 1 - Session 2 (20 minutes)</b></summary>
