@@ -267,3 +267,26 @@ Built the reports history page from scratch. Created a table that fetches and di
 **When a browser caches static assets like JavaScript files, what HTTP headers from the server control how long the browser keeps that cached version?**
 
 **Why might browser caching be more aggressive for .js and .css files compared to .html files?**
+
+### Saturday Jan 4
+Redesigned the analysis archetypes after discovering all three produced nearly identical outputs. Learned prompt engineering principles, created custom Claude Code agents for delegating work, and set up PostgreSQL for production persistence.
+
+**When writing LLM prompts, why should format instructions come before the actual question or task?**
+
+**If an LLM prompt leads with a question like "Is this worth watching?", what type of response does it invite, and why might this conflict with strict format requirements?**
+
+**When multiple instructions in an LLM prompt contradict each other (e.g., "this is analysis, not summary" followed by "only give me the summary"), which instruction typically wins, and why?**
+
+**What's the difference between scope-based agents (frontend, backend, infra) vs task-specific agents (db-migration, prompt-refiner) when designing reusable automation?**
+
+**What's the difference between surface-level bugs (typos, wrong variable names) and deep bugs (architectural issues, framework misunderstandings, edge cases) in terms of learning value?**
+
+**Why do file-based databases like H2 not persist data across deployments on cloud platforms like Railway or Heroku?**
+
+**What is ephemeral storage in containerized deployments, and how does it affect application state?**
+
+**In Spring Boot, what is the naming convention for profile-specific configuration files, and how does Spring know which one to load?**
+
+**If you have application-prod.properties and application-local.properties but no base application.properties, what must be true for either config to load?**
+
+**When Railway provisions a PostgreSQL database, what environment variables does it automatically create, and why don't you need to manually set credentials?**
