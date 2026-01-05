@@ -1,16 +1,41 @@
+let allReports = [];
+
 window.onload = function() {
     loadReports();
+    setupFilterListeners();
 };
 
 function loadReports() {
     fetch('/reports')
         .then(response => response.json())
         .then(data => {
-            displayReports(data);
+            allReports = data;
+            applyFilter();
         })
         .catch(error => {
             console.error('Error fetching reports:', error);
         });
+}
+
+function setupFilterListeners() {
+    const filterRadios = document.querySelectorAll('input[name="archetypeFilter"]');
+    filterRadios.forEach(radio => {
+        radio.addEventListener('change', applyFilter);
+    });
+}
+
+function applyFilter() {
+    const selectedFilter = document.querySelector('input[name="archetypeFilter"]:checked').value;
+    console.log(selectedFilter);
+    console.log(allReports)
+    let filteredReports;
+    if (selectedFilter === 'ALL') {
+        filteredReports = allReports;
+    } else {
+        filteredReports = allReports.filter(report => report.archetype == selectedFilter);
+    }
+
+    displayReports(filteredReports);
 }
 
 function displayReports(reports) {

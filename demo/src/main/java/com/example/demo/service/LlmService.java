@@ -25,7 +25,7 @@ public class LlmService {
         String prompt = buildPrompt(archetype, customPrompt);
 
         ResponseCreateParams params = ResponseCreateParams.builder()
-        .input(prompt + transcript + "Only give me the summary, not your response. No Filler. ")
+        .input(prompt + transcript)
         .model(ChatModel.GPT_4_1)
         .build();
 
@@ -39,14 +39,22 @@ public class LlmService {
                 return customPrompt;
             }
             // Fallback to ENTRY_LEVEL if custom prompt is empty
-            archetype = AnalysisArchetype.ENTRY_LEVEL;
+            archetype = AnalysisArchetype.KEY_POINTS;
         }
 
         return switch (archetype) {
-            case TWELVE_YEAR_OLD -> "Summarize this in simple terms that a 12-year-old would understand, in about 100 words: ";
-            case ENTRY_LEVEL -> "Generate a brief summary in 50 words: ";
-            case HIGH_LEVEL -> "Provide a high-level overview in one sentence: ";
-            default -> "Generate a brief summary in 50 words: ";
+            case TLDR -> "Reply with exactly ONE sentence explaining why this content is worth watching. Nothing more: ";
+            case KEY_POINTS -> "Extract the 3-5 most important takeaways from this content as a bullet list. Each bullet should be a complete, actionable insight: ";
+            case DEEP_DIVE -> """
+                    Analyze this content critically in EXACTLY 4 short sections (max 150 words total):
+
+                    **THESIS:** One sentence stating the creator's main argument.
+                    **STRENGTHS:** 2 things done well (be specific).
+                    **WEAKNESSES:** 2 flaws, gaps, or counterarguments the creator missed.
+                    **VERDICT:** One sentence - who should watch this and why (or why not).
+
+                    Be direct and opinionated. This is analysis, not summary: """;
+            default -> "Extract the 3-5 most important takeaways from this content as a bullet list. Each bullet should be a complete, actionable insight: ";
         };
     }
 }

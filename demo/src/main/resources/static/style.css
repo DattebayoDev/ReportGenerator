@@ -187,3 +187,19 @@ tbody tr:hover {
     border-radius: 4px;
     margin: 16px 0;
 }
+
+/* Filter section */
+.filter-section {
+    background: white;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.filter-section > label {
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 12px;
+}

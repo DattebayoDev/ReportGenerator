@@ -10,6 +10,28 @@
     <div class="container-wide">
         <h1>Analysis History</h1>
 
+        <div class="filter-section">
+            <label>Filter by Archetype:</label>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="archetypeFilter" value="ALL" checked>
+                    All
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="archetypeFilter" value="TLDR">
+                    TLDR
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="archetypeFilter" value="KEY_POINTS">
+                    Key Points
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="archetypeFilter" value="DEEP_DIVE">
+                    Deep Dive
+                </label>
+            </div>
+        </div>
+
         <div id="loading-reports" class="loading">Loading reports...</div>
 
         <table id="reportsTable" class="hidden">
