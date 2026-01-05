@@ -290,3 +290,20 @@ Redesigned the analysis archetypes after discovering all three produced nearly i
 **If you have application-prod.properties and application-local.properties but no base application.properties, what must be true for either config to load?**
 
 **When Railway provisions a PostgreSQL database, what environment variables does it automatically create, and why don't you need to manually set credentials?**
+
+### Sunday Jan 5
+Cleaned up TODO.md session history and planned the new sprint. Identified critical UX issues in the deployed app (formatting, layout, performance tracking) through actual usage. Discussed sprint planning principles and the importance of concrete, actionable task breakdown.
+
+**When planning sprint tasks or "blocks" of work, what characteristics make a task concrete and actionable vs vague and hard to start?**
+
+**What is decision fatigue in software development, and how does poor task breakdown at the sprint level contribute to it?**
+
+**When is investing time in process optimization (like improving sprint planning or git workflows) worth the upfront cost vs being a form of analysis paralysis?**
+
+**In a git workflow, what's the conceptual difference between staging changes, committing them, and pushing them? Why are these three separate operations instead of one?**
+
+**When identifying bugs or UX issues in a deployed application through actual usage, why should you investigate and understand the root cause before jumping to implementation?**
+
+**What makes a good "demo moment" or success criteria for a sprint, and why is defining this upfront important for task selection?**
+
+**If you finish a project and deploy it to production, but then identify UX issues through usage, does this mean the project "failed" or is this normal for iterative development?**

@@ -4,29 +4,27 @@
 
 ---
 
-## Week of Jan 5-11, 2026: Error Handling & Comments Integration Sprint
+## Week of Jan 5-11, 2026: UX Polish & Bug Fixes Sprint
 
-**Status:** Starting new sprint focused on robustness and richer analysis sources.
+**Status:** Fixing critical bugs and improving content readability.
 
 **Blocks:**
-- **Block 1: Handle videos without transcripts - backend error handling**
-- **Block 2: Handle videos without transcripts - frontend error display**
-- **Block 3: Integrate YouTube comments API**
-- **Block 4: Add YouTube comments to analysis prompts**
-- **Block 5: Integrate Reddit comments API**
-- **Block 6: Add Reddit comments to analysis prompts**
-- **Block 7: Design user feedback feature (schema + API)**
+- **Block 1: Fix URL parsing bug (double equals signs in URLs like &pp= causing failures)**
+- **Block 2: Fix frontend rendering (bullet points showing as "0.1\n0.2" instead of formatted list)**
+- **Block 3: Update layout width (change to 80% screen width, reduce white space)**
+- **Block 4: Add performance tracking (track total time from analyze click to response received)**
 
 **Future Work:**
-- Build user feedback frontend
-- Deploy comments integration to production
-- Performance testing with longer videos
+- Handle videos without transcripts (error message/fallback)
+- Break down performance by API (YouTube fetch vs GPT processing time)
+- Integrate YouTube/Reddit comments for richer analysis
+- User feedback feature for friends using the app
 
 ---
 
 ## Session History
 
-*Sessions for Week of Jan 5-11, 2026 will appear here.*
+**Sunday Jan 5 (45 minutes):** Reorganized TODO.md with correct session dates and consolidated multi-session days. Identified critical UX issues through actual app usage: URL parsing bug with double equals signs, bullet point formatting broken in frontend, narrow content width wasting screen space, and need for performance tracking. Replaced vague sprint blocks with 4 concrete, actionable fixes.
 
 ---
 
