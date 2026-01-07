@@ -307,3 +307,26 @@ Cleaned up TODO.md session history and planned the new sprint. Identified critic
 **What makes a good "demo moment" or success criteria for a sprint, and why is defining this upfront important for task selection?**
 
 **If you finish a project and deploy it to production, but then identify UX issues through usage, does this mean the project "failed" or is this normal for iterative development?**
+
+### Tuesday Jan 7
+Worked on URL parsing bug and encountered production deployment issue with Hibernate dialect. Learned about regex quantifiers, library evolution patterns, and JavaScript's array-to-string coercion behavior.
+
+**In regex patterns, what does the quantifier `{n}` mean, and how is it different from `*` or `+`?**
+
+**If a regex pattern is `[a-zA-Z0-9_-]{11}`, what does this match in plain English?**
+
+**When configuring production environments, what are the risks of using `spring.jpa.hibernate.ddl-auto=update` with real user data?**
+
+**What is the difference between explicit configuration (specifying values in properties files) vs implicit/auto-detection (letting the framework figure it out), and when should you prefer each approach?**
+
+**How do mature libraries evolve to avoid creating version-specific classes forever (e.g., PostgreSQL10Dialect, PostgreSQL11Dialect, PostgreSQL12Dialect)? What design pattern replaces version detection?**
+
+**What is feature detection in library design, and how does it differ from version detection?**
+
+**In JavaScript, what happens when you assign an array to an element's `textContent` property?**
+
+**If you have an array `["Line 1", "Line 2", "Line 3"]` and assign it to `div.textContent`, what string appears in the div?**
+
+**What is JavaScript's implicit array-to-string coercion behavior, and what method gets called automatically during this conversion?**
+
+**What's the difference between `textContent` and `innerHTML` in the DOM API, specifically regarding how they handle HTML tags and special characters?**
