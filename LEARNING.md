@@ -330,3 +330,22 @@ Worked on URL parsing bug and encountered production deployment issue with Hiber
 **What is JavaScript's implicit array-to-string coercion behavior, and what method gets called automatically during this conversion?**
 
 **What's the difference between `textContent` and `innerHTML` in the DOM API, specifically regarding how they handle HTML tags and special characters?**
+
+### Thursday Jan 8
+Debugged Railway production deployment where the database connection failed despite successful deployment. Learned about service isolation in cloud platforms and the difference between deployment success and application runtime success. Set up Spring Boot Actuator for performance monitoring and debugged endpoint exposure configuration.
+
+**In cloud platforms that separate infrastructure into independent services (database, application, cache), do environment variables from one service automatically propagate to other services? How are credentials shared between services?**
+
+**What's the difference between "deployment successful" and "application running successfully" in containerized cloud deployments? Why can a deployment succeed but the application still fail to respond to requests?**
+
+**If your Spring Boot application startup logs show "Failed to initialize JPA EntityManagerFactory: Unable to open JDBC Connection", but your datasource configuration uses environment variables like ${PGHOST}, what should you verify first?**
+
+**When debugging cloud deployment issues where local development works but production fails, what's the systematic approach to verifying environment-specific configuration (database URLs, API keys, service endpoints)?**
+
+**In Spring Boot, if you have multiple profile-specific properties files (application-local.properties, application-prod.properties) but don't set SPRING_PROFILES_ACTIVE, which configuration gets loaded and what happens to your app?**
+
+**What is Spring Boot Actuator, and what's the difference between developer-facing metrics (/actuator/metrics) vs user-facing performance data returned in API responses?**
+
+**If Spring Boot Actuator's /actuator/health endpoint works but /actuator/metrics returns 404, despite both being listed in management.endpoints.web.exposure.include, what are the likely causes?**
+
+**When displaying formatted text in a webpage, what are the three approaches (textContent, innerHTML, DOM manipulation), and what are the security and formatting trade-offs of each?**

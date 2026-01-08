@@ -9,7 +9,7 @@ public class UrlParser {
         String extractedId;
         String[] lengthOfString;
         if (url.contains("=")) {
-            extractedId = url.split("=")[1];
+            extractedId = url.split("=")[1].substring(0, 11);
         } else {
             lengthOfString = url.split("/");
             extractedId =  lengthOfString[lengthOfString.length - 1];

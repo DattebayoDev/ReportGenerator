@@ -23,15 +23,10 @@ form.addEventListener('submit', function(event) {
     const archetype = document.querySelector('input[name="archetype"]:checked').value;
     const customPrompt = customPromptTextarea.value || '';
 
-    console.log('Submitting URL:', url);
-    console.log('Archetype:', archetype);
-    console.log('Custom Prompt:', customPrompt);
-    console.log(1)
     // Show loading, hide previous results
     loadingDiv.classList.remove('hidden');
     resultDiv.classList.add('hidden');
     errorDiv.classList.add('hidden');
-    console.log('removed')
     fetch('/analyze', {
         method: 'POST',
         headers: {
@@ -51,8 +46,21 @@ form.addEventListener('submit', function(event) {
     })
     .then(data => {
         loadingDiv.classList.add('hidden');
-        summary = (data.summary).split('\n');
-        resultDiv.textContent = summary;
+
+        // Clean up markdown and split by newlines
+        const summary = (data.summary).replaceAll("**", "");
+        const lines = summary.split('\n');
+
+        // Clear existing content
+        resultDiv.innerHTML = '';
+
+        // Create a paragraph element for each line
+        lines.forEach(line => {
+            const p = document.createElement('p');
+            p.textContent = line;
+            resultDiv.appendChild(p);
+        });
+
         errorDiv.classList.add('hidden');
         resultDiv.classList.remove('hidden');
     })

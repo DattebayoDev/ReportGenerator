@@ -6,6 +6,7 @@ import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.core.JsonField;
 import com.openai.models.ChatModel;
 import com.openai.models.responses.*;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class LlmService {
     @Value("${OPENAI_API}")
     private String apiKey;
 
+    @Timed(value = "openai.summarize", description = "Time taken to generate summary via OpenAI")
     public String summarize(String transcript, AnalysisArchetype archetype, String customPrompt) {
         OpenAIClient client = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)

@@ -1,0 +1,100 @@
+# Report Generator - Progress Tracker
+
+*Rolling 2-week window. Older weeks will be archived to HISTORY.md.*
+
+---
+
+## Week of Dec 30, 2025 - Jan 4, 2026: Web UI Sprint
+
+**Status:** Web UI Sprint complete! Redesigned archetypes (TLDR, KEY_POINTS, DEEP_DIVE), added filtering to reports page, set up PostgreSQL for production persistence. Ready for final testing.
+
+**Web UI Blocks:**
+- **Block 1: HTML form with URL input and archetype selection** ✓
+- **Block 2: Wire form to /analyze endpoint and display summary** ✓
+- **Block 3: Fix View Reports button and build reports history page** ✓
+- **Block 4: Deploy updated UI to Railway and test in production** ✓
+- **Block 5: Redesign archetypes and fix prompt differentiation** ✓
+- **Block 6: Add archetype filtering to reports page** ✓
+- **Block 7: Set up PostgreSQL for Railway persistence** ✓
+
+**Future Work:**
+- Handle videos without transcripts (error message/fallback)
+- Source and analyze YouTube/Reddit comments
+- User feedback feature for friends using the app
+
+---
+
+## Session History
+
+<details>
+<summary><b>Saturday Jan 4 (60 minutes)</b></summary>
+
+Redesigned analysis archetypes (TLDR, KEY_POINTS, DEEP_DIVE) after discovering old ones produced identical outputs. Created three scope-based agents (backend, frontend, infra) and delegated PostgreSQL setup, archetype filtering, and prompt refinement. Learned prompt engineering principles and debugged agent-introduced bugs.
+
+</details>
+
+<details>
+<summary><b>Friday Jan 3 (50 minutes)</b></summary>
+
+Built reports history page with table displaying all analyzed reports. Implemented loading indicators and debugged browser caching issues using DevTools "Disable cache" checkbox.
+
+</details>
+
+<details>
+<summary><b>Thursday Jan 2 - Session 2 (20 minutes)</b></summary>
+
+**What was planned:** Fix the caching bug by modifying the lookup logic in UrlController to consider both postId and archetype when checking if a report already exists, adding archetype field to the Report entity and updating the repository findBy methods.
+
+**What actually happened:** Started by discussing database migration strategies and the implications of adding a new column to an existing table with data. Learned about the distinction between side projects with test data versus production systems, and when it's acceptable to let ddl-auto handle schema changes versus using explicit migration tools like Flyway or Liquibase. Fixed the caching bug by adding an archetype field to the Report entity with the @Enumerated annotation set to EnumType.STRING to store the enum name rather than its ordinal position. Created a new findByPostIdAndArchetype method in ReportRepository that generates a composite key lookup using Spring Data JPA's method naming convention. Updated UrlController to check both postId and archetype in the lookup logic on line 54, and modified the report creation logic to set the archetype field for both YouTube and Reddit reports. Tested the fix and confirmed that analyzing the same video with different archetypes now generates fresh summaries instead of returning cached results. Discovered through testing that videos without transcripts cause errors, and identified future work items including adding a loading indicator for the UI and sourcing comments from YouTube and Reddit for more comprehensive analysis.
+
+**What didn't finish:** The View Reports button navigation issue remains unresolved. Need to handle videos without transcripts gracefully with error messages or fallback behavior. Loading indicator for UI not implemented yet. Comment sourcing feature not started.
+
+**Next session:** Fix the View Reports button and build the reports history page.
+
+</details>
+
+<details>
+<summary><b>Thursday Jan 2 - Session 1 (45 minutes)</b></summary>
+
+Implemented archetype feature with AnalysisRequest DTO and radio buttons. Created buildPrompt() method with switch expression. Discovered caching bug where same video with different archetypes returns cached result.
+
+</details>
+
+<details>
+<summary><b>Wednesday Jan 1 - Session 2 (60 minutes)</b></summary>
+
+Wired Analyze button to /analyze endpoint with fetch(). Debugged JavaScript async issues and got basic analyze flow working with summary display.
+
+</details>
+
+<details>
+<summary><b>Wednesday Jan 1 - Session 1 (30 minutes)</b></summary>
+
+Created frontend scaffolding (index.html, style.css, app.js) and configured Spring Boot to serve static files with live reload.
+
+</details>
+
+<details>
+<summary><b>Tuesday Dec 31 (45 minutes)</b></summary>
+
+Debugged "duplicate video bug" (user error). Confirmed API works correctly and planned Web UI Sprint with 5 blocks.
+
+</details>
+
+---
+
+## Past Weeks
+
+<details>
+<summary><b>Week of Dec 29, 2025 - Jan 4, 2026: Railway Deployment Sprint</b></summary>
+
+Mon Dec 29: Fixed Lombok Maven issues, deployed to Railway, downgraded to Java 17 for compatibility.
+
+</details>
+
+<details>
+<summary><b>Week of Dec 22-28, 2025</b></summary>
+
+Designed Transcript entity, implemented getTranscript(), swapped to official OpenAI SDK, completed MVP with YouTube transcripts and GPT-4 summarization.
+
+</details>

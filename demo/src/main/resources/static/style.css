@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 50%;
     margin: 60px auto;
     padding: 20px;
 }
@@ -202,4 +202,9 @@ tbody tr:hover {
     font-size: 14px;
     display: block;
     margin-bottom: 12px;
+}
+
+#result {
+    max-width: 80%;
+    margin: 10px auto;
 }

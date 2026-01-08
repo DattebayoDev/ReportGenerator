@@ -18,9 +18,6 @@ public class ReportGeneratorApplication {
 		SpringApplication.run(ReportGeneratorApplication.class, args);
 	}
 
-//    @Value("${openai.api.key}")
-//    private String openAiApiKey;
-
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
@@ -31,8 +28,4 @@ public class ReportGeneratorApplication {
         return TranscriptApiFactory.createDefault();
     }
 
-//    @Bean
-//    public OpenAIClient openAiService() {
-//        return OpenAIOkHttpClient.fromEnv(openAiApiKey);
-//    }
 }
