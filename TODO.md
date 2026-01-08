@@ -9,10 +9,10 @@
 **Status:** Fixing critical bugs and improving content readability.
 
 **Blocks:**
-- **Block 1: Fix URL parsing bug (double equals signs in URLs like &pp= causing failures)**
-- **Block 2: Fix frontend rendering (bullet points showing as "0.1\n0.2" instead of formatted list)**
-- **Block 3: Update layout width (change to 80% screen width, reduce white space)**
-- **Block 4: Add performance tracking (track total time from analyze click to response received)**
+- ~~**Block 1: Fix URL parsing bug (double equals signs in URLs like &pp= causing failures)**~~
+- ~~**Block 2: Fix frontend rendering (bullet points showing as "0.1\n0.2" instead of formatted list)**~~
+- **Block 3: Update layout width (change to 80% screen width, reduce white space)** - needs refinement
+- ~~**Block 4: Add performance tracking (track total time from analyze click to response received)**~~
 
 **Future Work:**
 - Handle videos without transcripts (error message/fallback)
