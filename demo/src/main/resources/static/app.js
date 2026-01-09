@@ -30,7 +30,8 @@ form.addEventListener('submit', function(event) {
     fetch('/analyze', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
             url: url,

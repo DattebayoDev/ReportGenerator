@@ -24,11 +24,13 @@
 
 ## Session History
 
+**Thursday Jan 9 (50 minutes):** Encountered YouTube bot detection blocking transcript fetching in Railway production. The thoroldvix library works locally (residential IP) but fails in Railway (data center IP detected as bot). Researched why the official YouTube Data API can't be used - OAuth restrictions mean you can only download transcripts for videos you own, making it useless for summarizing arbitrary public videos. Explored multiple solutions: better HTTP headers (unlikely to help when IP is the issue), residential proxy services (costs money), client-side fetching (blocked by CORS), browser extensions (changes product entirely), and building own proxy (complex). Decided on local deployment with Cloudflare Tunnel as the pragmatic free solution. Successfully set up Cloudflare Tunnel which routes public traffic through residential IP while maintaining cloud-like accessibility. Added ngrok-skip-browser-warning headers to frontend JavaScript (ended up unnecessary for Cloudflare but left in). Confirmed app works via Cloudflare Tunnel URL without bot detection issues.
+
 **Thursday Jan 8 (75 minutes):** Fixed Railway deployment (missing database env vars), completed Blocks 1, 2, and 4 using parallel agents. Block 3 layout needs refinement.
 
 **Wednesday Jan 7 (45 minutes):** Partially fixed URL parsing bug and debugged Hibernate PostgreSQL dialect issue. Identified Block 2's root cause (array-to-string coercion in JavaScript).
 
-**Sunday Jan 5 (45 minutes):** Reorganized TODO.md with correct session dates and consolidated multi-session days. Identified critical UX issues through actual app usage: URL parsing bug with double equals signs, bullet point formatting broken in frontend, narrow content width wasting screen space, and need for performance tracking. Replaced vague sprint blocks with 4 concrete, actionable fixes.
+**Monday Jan 5 (45 minutes):** Reorganized TODO.md with correct session dates and consolidated multi-session days. Identified critical UX issues through actual app usage: URL parsing bug with double equals signs, bullet point formatting broken in frontend, narrow content width wasting screen space, and need for performance tracking. Replaced vague sprint blocks with 4 concrete, actionable fixes.
 
 ---
 

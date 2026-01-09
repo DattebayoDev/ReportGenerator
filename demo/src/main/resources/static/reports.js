@@ -6,7 +6,11 @@ window.onload = function() {
 };
 
 function loadReports() {
-    fetch('/reports')
+    fetch('/reports', {
+        headers: {
+            'ngrok-skip-browser-warning': 'true'
+        }
+    })
         .then(response => response.json())
         .then(data => {
             allReports = data;

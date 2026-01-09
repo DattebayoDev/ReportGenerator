@@ -349,3 +349,34 @@ Debugged Railway production deployment where the database connection failed desp
 **If Spring Boot Actuator's /actuator/health endpoint works but /actuator/metrics returns 404, despite both being listed in management.endpoints.web.exposure.include, what are the likely causes?**
 
 **When displaying formatted text in a webpage, what are the three approaches (textContent, innerHTML, DOM manipulation), and what are the security and formatting trade-offs of each?**
+
+### Thursday Jan 9
+Encountered YouTube bot detection blocking transcript fetching in Railway production (worked locally). Researched YouTube's official API and discovered OAuth limitations prevent downloading transcripts from videos you don't own. Explored scraping approaches, proxy solutions, and cloud deployment architectures. Decided on local deployment with Cloudflare Tunnel to use residential IP while maintaining public accessibility.
+
+**When YouTube (or any website) detects bot traffic, what are the three main characteristics they analyze to distinguish automated requests from real browser traffic?**
+
+**What's the difference between residential IP addresses (home ISPs) and data center IP addresses (cloud providers like AWS, Railway, Heroku) from a bot detection perspective?**
+
+**If your Spring Boot application works locally but gets blocked by YouTube's bot detection when deployed to Railway/Heroku, which of these factors is most likely the root cause: (1) HTTP headers, (2) IP address reputation, or (3) request frequency?**
+
+**What is OAuth 2.0 authorization in the context of YouTube's Data API, and why does it prevent you from downloading captions/transcripts for videos you don't own?**
+
+**Why can't the official YouTube Data API v3 be used to build a service that summarizes arbitrary public YouTube videos? What business incentives drive this API design decision?**
+
+**What is CORS (Cross-Origin Resource Sharing), and why does the browser block your frontend JavaScript (running on yourapp.com) from making requests directly to youtube.com?**
+
+**When a browser enforces CORS, at what point in the request lifecycle does the block occur: (1) before the request is sent, (2) after the request is sent but before the response arrives, or (3) after the response arrives but before JavaScript can access it?**
+
+**What's the difference between server-side HTTP requests (from your Spring Boot backend) and client-side HTTP requests (from JavaScript in the browser) in terms of CORS enforcement?**
+
+**What is a residential proxy service, and how does it help bypass bot detection compared to free proxy lists or data center proxies?**
+
+**When comparing deployment architectures for a web scraper that gets blocked in the cloud, what are the trade-offs between: (1) local deployment + tunneling service, (2) cloud deployment + residential proxy service, and (3) browser extension?**
+
+**What is ngrok, and how does it allow a locally-running application to be accessible via a public HTTPS URL?**
+
+**What is Cloudflare Tunnel (formerly Argo Tunnel), and how does its free quick tunnel feature differ from ngrok's free tier in terms of warning pages and user experience?**
+
+**When you run `cloudflared tunnel --url http://localhost:8080`, what happens to requests from the internet? Trace the path from external user → your local application.**
+
+**If you add custom HTTP headers (like 'ngrok-skip-browser-warning') to JavaScript fetch() calls, when do these headers get sent: (1) when loading the initial HTML page, (2) only on subsequent API calls from JavaScript, or (3) on every request including static assets?**
