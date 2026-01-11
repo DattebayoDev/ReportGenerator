@@ -380,3 +380,16 @@ Encountered YouTube bot detection blocking transcript fetching in Railway produc
 **When you run `cloudflared tunnel --url http://localhost:8080`, what happens to requests from the internet? Trace the path from external user → your local application.**
 
 **If you add custom HTTP headers (like 'ngrok-skip-browser-warning') to JavaScript fetch() calls, when do these headers get sent: (1) when loading the initial HTML page, (2) only on subsequent API calls from JavaScript, or (3) on every request including static assets?**
+
+### Saturday Jan 11
+Redesigned the entire frontend UI to look more professional with a Medium/Substack-inspired aesthetic. Implemented template structure while preserving all functional elements, adjusted spacing throughout, and used shadow/border elevation instead of background color contrast for visual hierarchy.
+
+**When using CSS flexbox with `flex-direction: column` and `min-height: 100vh` on a container, how does `margin-top: auto` on the last child element work to push it to the bottom of the viewport?**
+
+**In UI design, what are the tradeoffs between using subtle background color differences (like #fafafa vs #ffffff) versus relying entirely on shadows and borders for visual hierarchy and section separation?**
+
+**When implementing a design template into an existing functional codebase, what's the systematic approach to preserve interactive elements (IDs, event handlers, form logic) while completely restructuring the visual HTML/CSS?**
+
+**What's the CSS technique for creating a "floating card" effect where a white card appears elevated above a white background without any color contrast?**
+
+**In flexbox layout, why does `margin-top: auto` absorb available space differently than explicitly setting a large margin value or using spacer divs?**

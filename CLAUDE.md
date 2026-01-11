@@ -84,14 +84,12 @@ When user says "I am done", automatically execute WITHOUT asking for approval:
    - Avoid vague questions that could be interpreted multiple ways
    - Focus on conceptual understanding, design patterns, architectural decisions
 3. Update TODO.md with session summary:
-   - **Format:** Use full sentences in narrative form (NOT bullet points)
+   - **Format:** Concise narrative (2-3 sentences), full sentences (NOT bullet points)
    - Rolling 2-week window (older weeks archived to HISTORY.md when needed)
    - Session duration (time spent coding)
-   - What was originally planned for today (from TODO.md)
-   - What actually accomplished (in paragraph form)
-   - What didn't finish (in paragraph form)
+   - What was originally planned, what actually accomplished, what didn't finish
    - Next session focus or upcoming week's sprint plan
-   - (Learning insights go in LEARNING.md, NOT TODO.md)
+   - Keep it brief - technical details go in LEARNING.md, NOT TODO.md
 4. Git commit with descriptive message (NO "Generated with Claude Code" attribution)
 5. Git push to remote
 

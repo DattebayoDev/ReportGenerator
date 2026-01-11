@@ -3,63 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Generator</title>
+    <title>Clarity - Content Analysis Tool</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Report Generator</h1>
-        <p>Paste a YouTube URL to get a summary</p>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Clarity</div>
+                <nav>
+                    <a href="reports.html" class="nav-link">View Reports</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-        <form id="analyze-form">
-            <input
-                type="text"
-                id="url-input"
-                name="url"
-                placeholder="https://www.youtube.com/watch?v=..."
-                required
-            >
+    <section class="hero">
+        <div class="container">
+            <h1>Understand any video, instantly</h1>
+        </div>
+    </section>
 
-            <div class="archetype-section">
-                <label>Analysis Style:</label>
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="archetype" value="TLDR" checked>
-                        TL;DR
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="archetype" value="KEY_POINTS">
-                        Key Points
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="archetype" value="DEEP_DIVE">
-                        Deep Dive
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="archetype" value="CUSTOM">
-                        Custom
-                    </label>
+    <section class="input-section">
+        <div class="container">
+            <div class="input-wrapper">
+                <form id="analyze-form">
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            id="url-input"
+                            name="url"
+                            placeholder="Paste YouTube URL here..."
+                            required
+                        >
+                        <button type="submit" class="analyze-btn">Analyze</button>
+                    </div>
+
+                    <div class="archetype-section">
+                        <label>Analysis Style:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="archetype" value="TLDR" checked>
+                                TL;DR
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="archetype" value="KEY_POINTS">
+                                Key Points
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="archetype" value="DEEP_DIVE">
+                                Deep Dive
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="archetype" value="CUSTOM">
+                                Custom
+                            </label>
+                        </div>
+
+                        <textarea
+                            id="custom-prompt"
+                            placeholder="Enter your custom analysis prompt here..."
+                            class="hidden"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div id="loading" class="loading-indicator hidden">Analyzing your content...</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section">
+        <div class="container">
+            <div id="result" class="results-card hidden">
+                <div class="result-header">
+                    <div class="result-url"></div>
+                    <h2 class="result-title"></h2>
+                    <div class="archetypes"></div>
                 </div>
 
-                <textarea
-                    id="custom-prompt"
-                    placeholder="Enter your custom analysis prompt here..."
-                    class="hidden"
-                    rows="3"
-                ></textarea>
+                <div class="result-content"></div>
+
+                <div class="result-footer"></div>
             </div>
-            <div id="loading" class="hidden">Analyzing...</div>
 
-            <button type="submit">Analyze</button>
-            <button type="submit" onclick="window.location.href='reports.html'">View Reports</button>
-        </form>
-    </div>
+            <div id="error" class="error-card hidden"></div>
+        </div>
+    </section>
 
-    <div id="result" class="result hidden"></div>
-    <div id="error" class="error hidden"></div>
+    <footer>
+        <div class="container">
+            <p>Clarity - Powered by AI</p>
+        </div>
+    </footer>
 
     <script src="app.js"></script>
 </body>
 </html>
-
-<!--value = "https://www.youtube.com/watch?v=2mA4vZeHp8o"-->

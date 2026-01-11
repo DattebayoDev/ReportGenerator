@@ -4,17 +4,13 @@
 
 ---
 
-## Week of Jan 5-11, 2026: UX Polish & Bug Fixes Sprint
+## Blocks
 
-**Status:** Fixing critical bugs and improving content readability.
+(No active blocks - ready for new sprint planning)
 
-**Blocks:**
-- ~~**Block 1: Fix URL parsing bug (double equals signs in URLs like &pp= causing failures)**~~
-- ~~**Block 2: Fix frontend rendering (bullet points showing as "0.1\n0.2" instead of formatted list)**~~
-- **Block 3: Update layout width (change to 80% screen width, reduce white space)** - needs refinement
-- ~~**Block 4: Add performance tracking (track total time from analyze click to response received)**~~
+## Backlog
 
-**Future Work:**
+- Dynamic UI based on archetype (TLDR = compact card, KEY_POINTS = bullet list layout, DEEP_DIVE = article format)
 - Handle videos without transcripts (error message/fallback)
 - Break down performance by API (YouTube fetch vs GPT processing time)
 - Integrate YouTube/Reddit comments for richer analysis
@@ -24,7 +20,9 @@
 
 ## Session History
 
-**Thursday Jan 9 (50 minutes):** Encountered YouTube bot detection blocking transcript fetching in Railway production. The thoroldvix library works locally (residential IP) but fails in Railway (data center IP detected as bot). Researched why the official YouTube Data API can't be used - OAuth restrictions mean you can only download transcripts for videos you own, making it useless for summarizing arbitrary public videos. Explored multiple solutions: better HTTP headers (unlikely to help when IP is the issue), residential proxy services (costs money), client-side fetching (blocked by CORS), browser extensions (changes product entirely), and building own proxy (complex). Decided on local deployment with Cloudflare Tunnel as the pragmatic free solution. Successfully set up Cloudflare Tunnel which routes public traffic through residential IP while maintaining cloud-like accessibility. Added ngrok-skip-browser-warning headers to frontend JavaScript (ended up unnecessary for Cloudflare but left in). Confirmed app works via Cloudflare Tunnel URL without bot detection issues.
+**Saturday Jan 11 (60 minutes):** Redesigned homepage UI with Medium/Substack-inspired clean aesthetic. Implemented new HTML structure with header navigation, hero section, input area, and floating results card. Replaced gray background with pure white throughout, using stronger shadows and borders for elevation instead of color contrast, and adjusted spacing to be more condensed.
+
+**Friday Jan 9 (50 minutes):** Encountered YouTube bot detection blocking transcript fetching in Railway production (data center IPs flagged as bots). Researched solutions including official API (OAuth restrictions), proxies (cost), and client-side fetching (CORS blocked). Set up Cloudflare Tunnel to route public traffic through residential IP while maintaining accessibility.
 
 **Thursday Jan 8 (75 minutes):** Fixed Railway deployment (missing database env vars), completed Blocks 1, 2, and 4 using parallel agents. Block 3 layout needs refinement.
 
