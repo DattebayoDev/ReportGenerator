@@ -10,6 +10,8 @@
 
 ## Backlog
 
+- Implement Google OAuth authentication for user accounts
+- Re-enable reports page with per-user data isolation (users only see their own reports)
 - Dynamic UI based on archetype (TLDR = compact card, KEY_POINTS = bullet list layout, DEEP_DIVE = article format)
 - Handle videos without transcripts (error message/fallback)
 - Break down performance by API (YouTube fetch vs GPT processing time)
@@ -20,7 +22,7 @@
 
 ## Session History
 
-**Saturday Jan 11 (60 minutes):** Redesigned homepage UI with Medium/Substack-inspired clean aesthetic. Implemented new HTML structure with header navigation, hero section, input area, and floating results card. Replaced gray background with pure white throughout, using stronger shadows and borders for elevation instead of color contrast, and adjusted spacing to be more condensed.
+**Sunday Jan 11 (60 minutes):** Redesigned homepage UI with Medium/Substack-inspired clean aesthetic. Implemented new HTML structure with header navigation, hero section, input area, and floating results card. Replaced gray background with pure white throughout, using stronger shadows and borders for elevation instead of color contrast, and adjusted spacing to be more condensed.
 
 **Friday Jan 9 (50 minutes):** Encountered YouTube bot detection blocking transcript fetching in Railway production (data center IPs flagged as bots). Researched solutions including official API (OAuth restrictions), proxies (cost), and client-side fetching (CORS blocked). Set up Cloudflare Tunnel to route public traffic through residential IP while maintaining accessibility.
 

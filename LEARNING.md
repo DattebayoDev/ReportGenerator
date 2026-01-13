@@ -381,7 +381,7 @@ Encountered YouTube bot detection blocking transcript fetching in Railway produc
 
 **If you add custom HTTP headers (like 'ngrok-skip-browser-warning') to JavaScript fetch() calls, when do these headers get sent: (1) when loading the initial HTML page, (2) only on subsequent API calls from JavaScript, or (3) on every request including static assets?**
 
-### Saturday Jan 11
+### Sunday Jan 11
 Redesigned the entire frontend UI to look more professional with a Medium/Substack-inspired aesthetic. Implemented template structure while preserving all functional elements, adjusted spacing throughout, and used shadow/border elevation instead of background color contrast for visual hierarchy.
 
 **When using CSS flexbox with `flex-direction: column` and `min-height: 100vh` on a container, how does `margin-top: auto` on the last child element work to push it to the bottom of the viewport?**

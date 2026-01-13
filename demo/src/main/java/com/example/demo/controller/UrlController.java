@@ -79,32 +79,33 @@ public class UrlController {
         return report;
     }
 
-    @GetMapping("/reports")
-    public List<Report> getAllReports() {
-        return reportRepository.findAll();
-    }
-
-    @GetMapping("/transcripts")
-    public List<Transcript> getAllTranscripts() {
-        return transcriptRepository.findAll();
-    }
-
-    @GetMapping("/reports/{id}")
-    public Report getReport(@PathVariable("id") String id ){
-        return reportRepository.findByPostId(id);
-    }
-
-    @DeleteMapping("/reports/{id}")
-    public void deleteReport(@PathVariable("id") String id){
-        Report report = reportRepository.findByPostId(id);
-        if (report != null) {
-            reportRepository.deleteById(report.getId());
-        }
-    }
-
-    @GetMapping("/reports/platform")
-    public List<Report> getReports(@RequestParam("website") String website) {
-        String convertedPlatform = website.toUpperCase();
-        return reportRepository.findAllByPlatform(convertedPlatform);
-    }
+    // TEMPORARILY DISABLED - Re-enable after implementing Google OAuth authentication
+//    @GetMapping("/reports")
+//    public List<Report> getAllReports() {
+//        return reportRepository.findAll();
+//    }
+//
+//    @GetMapping("/transcripts")
+//    public List<Transcript> getAllTranscripts() {
+//        return transcriptRepository.findAll();
+//    }
+//
+//    @GetMapping("/reports/{id}")
+//    public Report getReport(@PathVariable("id") String id ){
+//        return reportRepository.findByPostId(id);
+//    }
+//
+//    @DeleteMapping("/reports/{id}")
+//    public void deleteReport(@PathVariable("id") String id){
+//        Report report = reportRepository.findByPostId(id);
+//        if (report != null) {
+//            reportRepository.deleteById(report.getId());
+//        }
+//    }
+//
+//    @GetMapping("/reports/platform")
+//    public List<Report> getReports(@RequestParam("website") String website) {
+//        String convertedPlatform = website.toUpperCase();
+//        return reportRepository.findAllByPlatform(convertedPlatform);
+//    }
 }
