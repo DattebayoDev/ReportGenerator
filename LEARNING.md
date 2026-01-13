@@ -393,3 +393,18 @@ Redesigned the entire frontend UI to look more professional with a Medium/Substa
 **What's the CSS technique for creating a "floating card" effect where a white card appears elevated above a white background without any color contrast?**
 
 **In flexbox layout, why does `margin-top: auto` absorb available space differently than explicitly setting a large margin value or using spacer divs?**
+
+### Monday Jan 12
+Started planning YouTube comments integration feature. Discussed API architecture decisions, clarified why YouTube Data API v3 treats comments differently from transcripts (OAuth not required for public comments), and broke down the feature into 5 implementation blocks.
+
+**Why does YouTube Data API v3 require OAuth for accessing transcripts/captions but allow public comments to be fetched with just an API key?**
+
+**When designing a new feature that requires calling an external API, what factors determine whether you need a separate controller endpoint versus integrating into an existing endpoint?**
+
+**If you already have all required parameters to make an API call (videoId, API key) from an existing user request, why would you NOT need to expose a separate endpoint to the user?**
+
+**When adding a new API integration to an existing service class (like YoutubeService), what are the tradeoffs between adding methods to the existing service versus creating a separate service class?**
+
+**In Spring Boot with RestTemplate, when should you return raw API response data versus creating DTOs to wrap the response?**
+
+**What's the difference between how YouTube's API treats "channel owner content" (transcripts) versus "public content" (comments) in terms of authentication requirements?**

@@ -6,7 +6,13 @@
 
 ## Blocks
 
-(No active blocks - ready for new sprint planning)
+**YouTube Comments Integration Sprint**
+
+- **Block 1: Design service architecture and data structures** - Decide where comments logic lives (YoutubeService vs separate service), what data structure to use for comments (raw JSON vs DTO vs simple strings), and how comments flow through the system
+- **Block 2: Implement YouTube Data API v3 comments fetching** - Create method to call commentThreads endpoint, handle API key from environment variables, fetch top 100 comments, parse response and extract items array
+- **Block 3: Integrate comments into LLM analysis** - Modify LlmService to accept both transcript and comments, update prompt to include community reaction analysis, handle token limits (transcript + 100 comments could be large)
+- **Block 4: Update UI to display Community Reaction section** - Add new section to results card, style it appropriately, handle cases where comments aren't available
+- **Block 5: Error handling and edge cases** - Handle videos with comments disabled, API failures, rate limits, empty comment sections
 
 ## Backlog
 
@@ -15,12 +21,12 @@
 - Dynamic UI based on archetype (TLDR = compact card, KEY_POINTS = bullet list layout, DEEP_DIVE = article format)
 - Handle videos without transcripts (error message/fallback)
 - Break down performance by API (YouTube fetch vs GPT processing time)
-- Integrate YouTube/Reddit comments for richer analysis
-- User feedback feature for friends using the app
 
 ---
 
 ## Session History
+
+**Monday Jan 12 (60 minutes):** Planned YouTube comments integration feature. Removed user feedback from backlog, discussed API key authentication vs OAuth for comments access, and created 5-block sprint plan (design, API integration, LLM integration, UI update, error handling). Started Block 1 design discussions around service architecture and data structures.
 
 **Sunday Jan 11 (60 minutes):** Redesigned homepage UI with Medium/Substack-inspired clean aesthetic. Implemented new HTML structure with header navigation, hero section, input area, and floating results card. Replaced gray background with pure white throughout, using stronger shadows and borders for elevation instead of color contrast, and adjusted spacing to be more condensed.
 
