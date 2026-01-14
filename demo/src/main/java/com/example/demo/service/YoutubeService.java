@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.TranscriptData;
-import com.example.demo.dto.YoutubeApiResponse;
-import com.example.demo.dto.YoutubeData;
+import com.example.demo.dto.YoutubeCommentsResponse;
 import io.github.thoroldvix.api.*;
 import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +39,18 @@ public class YoutubeService {
         transcriptData.setTranscript(finalBuild);
         return transcriptData;
     }
+
+    @Timed(value = "youtube.comments.fetch", description = "Time taken to fetch YouTube comments")
+    public List<String> getComments(String videoId) {
+        String url = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId="
+                + videoId + "&maxResults=100&order=relevance";
+
+        YoutubeCommentsResponse response = restTemplate.getForObject(url, YoutubeCommentsResponse.class);
+        YoutubeCommentsResponse response1 = new YoutubeCommentsResponse();
+        response1.getItems().stream().map(item -> item.getReplies().getComments()
+//        assert response != null;
+//        return response.getItems().stream()
+//                .map(item -> item.getReplies())
+////    }
 
 }

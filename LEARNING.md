@@ -408,3 +408,22 @@ Started planning YouTube comments integration feature. Discussed API architectur
 **In Spring Boot with RestTemplate, when should you return raw API response data versus creating DTOs to wrap the response?**
 
 **What's the difference between how YouTube's API treats "channel owner content" (transcripts) versus "public content" (comments) in terms of authentication requirements?**
+
+### Tuesday Jan 14
+Ran into a confusing IDE error where nested class methods appeared inaccessible even though Maven compilation succeeded. Debugged Java nested class visibility rules and learned about the difference between IDE analysis and actual compilation.
+
+**What does the error message "Cannot access [method]" mean in Java, and how is it different from "Cannot find symbol" or "Method does not exist"?**
+
+**In Java, what's the difference between a top-level class visibility rule (one public class per file) and nested class visibility rules?**
+
+**Can nested classes (classes defined inside another class) be declared public, or are they restricted by the "one public class per file" rule?**
+
+**If a nested class doesn't have the `public` keyword before `class`, what is its default visibility and which packages can access it?**
+
+**When you encounter an IDE error showing red squiggles but `mvn clean compile` succeeds, what does this tell you about the validity of your code?**
+
+**What are the two separate compilation/analysis systems at play when developing Java in an IDE, and which one determines if your code is actually valid?**
+
+**What is Lombok's role in code generation, and why might an IDE show errors for Lombok-generated methods even when Maven compilation succeeds?**
+
+**If nested classes in package `com.example.demo.dto` are package-private (no public keyword), can code in package `com.example.demo.service` call methods on objects of those nested class types? Why or why not?**
