@@ -409,7 +409,7 @@ Started planning YouTube comments integration feature. Discussed API architectur
 
 **What's the difference between how YouTube's API treats "channel owner content" (transcripts) versus "public content" (comments) in terms of authentication requirements?**
 
-### Tuesday Jan 14
+### Wednesday Jan 14
 Ran into a confusing IDE error where nested class methods appeared inaccessible even though Maven compilation succeeded. Debugged Java nested class visibility rules and learned about the difference between IDE analysis and actual compilation.
 
 **What does the error message "Cannot access [method]" mean in Java, and how is it different from "Cannot find symbol" or "Method does not exist"?**
