@@ -428,7 +428,7 @@ Ran into a confusing IDE error where nested class methods appeared inaccessible 
 
 **If nested classes in package `com.example.demo.dto` are package-private (no public keyword), can code in package `com.example.demo.service` call methods on objects of those nested class types? Why or why not?**
 
-### Wednesday Jan 15
+### Thursday Jan 16
 Continued implementing YouTube comments integration. Discovered the actual API structure through Postman testing - each CommentThread has both a top-level comment (via snippet.topLevelComment) and optional replies. Updated the DTO to correctly model this nested structure by separating ThreadSnippet from CommentSnippet. Wired getComments() into the analyze flow and started implementing extraction logic, but identified a logical bug where filter condition doesn't match what's being extracted.
 
 **When integrating with a third-party REST API, what are the tradeoffs between using the official SDK library versus making direct HTTP calls with RestTemplate and custom DTOs?**
