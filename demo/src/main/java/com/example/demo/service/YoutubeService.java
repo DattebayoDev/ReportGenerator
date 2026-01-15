@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,14 +44,25 @@ public class YoutubeService {
     @Timed(value = "youtube.comments.fetch", description = "Time taken to fetch YouTube comments")
     public List<String> getComments(String videoId) {
         String url = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId="
-                + videoId + "&maxResults=100&order=relevance";
+                + videoId + "&maxResults=100&order=relevance&key=" + apiKey;
 
         YoutubeCommentsResponse response = restTemplate.getForObject(url, YoutubeCommentsResponse.class);
-        YoutubeCommentsResponse response1 = new YoutubeCommentsResponse();
-        response1.getItems().stream().map(item -> item.getReplies().getComments()
-//        assert response != null;
+
+        if (response == null || response.getItems() == null) {
+            return List.of();
+        }
+
+        List<String> test = response.getItems().stream()
+                .flatMap(item -> item.getSnippet().getTopLevelComment().getSnippet().getTextOriginal()).toList();
+
 //        return response.getItems().stream()
-//                .map(item -> item.getReplies())
-////    }
+//                .filter(item -> item.getReplies() != null)
+//                .flatMap(item -> item.getReplies().getComments().stream())
+//                .map(comment -> comment.getSnippet().getTextOriginal())
+//                .toList();
+
+        return test;
+
+    }
 
 }

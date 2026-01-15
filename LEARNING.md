@@ -427,3 +427,26 @@ Ran into a confusing IDE error where nested class methods appeared inaccessible 
 **What is Lombok's role in code generation, and why might an IDE show errors for Lombok-generated methods even when Maven compilation succeeds?**
 
 **If nested classes in package `com.example.demo.dto` are package-private (no public keyword), can code in package `com.example.demo.service` call methods on objects of those nested class types? Why or why not?**
+
+### Wednesday Jan 15
+Continued implementing YouTube comments integration. Discovered the actual API structure through Postman testing - each CommentThread has both a top-level comment (via snippet.topLevelComment) and optional replies. Updated the DTO to correctly model this nested structure by separating ThreadSnippet from CommentSnippet. Wired getComments() into the analyze flow and started implementing extraction logic, but identified a logical bug where filter condition doesn't match what's being extracted.
+
+**When integrating with a third-party REST API, what are the tradeoffs between using the official SDK library versus making direct HTTP calls with RestTemplate and custom DTOs?**
+
+**If you need to call only one or two endpoints from a large API (like YouTube Data API v3), what factors determine whether the official SDK dependency is worth adding to your project?**
+
+**When mapping a JSON API response to Java DTOs, what's the systematic approach to ensure your class structure matches the actual response?**
+
+**Why is testing with actual API responses (via curl or Postman) more reliable than trusting API documentation alone when building DTOs?**
+
+**In Java streams, what's the difference between map() and flatMap() in terms of input-to-output cardinality?**
+
+**If you have a stream where each input element can produce multiple output elements (e.g., 1 CommentThread → 1 top-level comment + N reply comments), which stream operation should you use?**
+
+**When using stream operations like filter() followed by map(), what logical issue can arise if the filter checks one field but the map extracts a completely different field?**
+
+**If you filter a stream to keep only items where field X exists (.filter(item -> item.getX() != null)), but then extract field Y (.map(item -> item.getY())), what data might you accidentally exclude?**
+
+**When debugging complex stream chains, what's the systematic approach to verify what each operation (filter, map, flatMap) is doing to the data at each step?**
+
+**In nested object structures like YouTube's comment threads, why might you need to create multiple DTO classes even though they have similar field names (e.g., ThreadSnippet vs CommentSnippet)?**

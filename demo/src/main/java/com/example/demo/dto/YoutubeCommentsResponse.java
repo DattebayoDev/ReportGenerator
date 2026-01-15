@@ -15,9 +15,6 @@ public class YoutubeCommentsResponse {
     public static class PageInfo {
         private int totalResults;
         private int resultsPerPage;
-
-        // getters and setters
-        // ...
     }
 
     @Data
@@ -25,38 +22,50 @@ public class YoutubeCommentsResponse {
         private String kind;
         private String etag;
         private String id;
-        private Replies replies;
+        private ThreadSnippet snippet;   // thread-level snippet
+        private Replies replies;         // replies to the top-level comment
+    }
 
-        // getters and setters
-        // ...
+    /**
+     * Thread-level snippet (for each item in commentThreads).
+     * Contains the top-level comment and metadata about the thread.
+     */
+    @Data
+    public static class ThreadSnippet {
+        private String channelId;
+        private String videoId;
+        private Comment topLevelComment; // main comment in the thread
+        private boolean canReply;
+        private int totalReplyCount;
+        private boolean isPublic;
     }
 
     @Data
     public static class Replies {
         private List<Comment> comments;
-
-        // getters and setters
-        // ...
     }
 
+    /**
+     * Represents a comment (top-level or reply).
+     */
     @Data
     public static class Comment {
         private String kind;
         private String etag;
         private String id;
-        private CommentSnippet snippet;
-
-        // getters and setters
-        // ...
+        private CommentSnippet snippet; // comment-level snippet
     }
 
+    /**
+     * Comment-level snippet (for each Comment, including replies).
+     */
     @Data
     public static class CommentSnippet {
         private String channelId;
         private String videoId;
         private String textDisplay;
         private String textOriginal;
-        private String parentId;
+        private String parentId;              // null for top-level comments
         private String authorDisplayName;
         private String authorProfileImageUrl;
         private String authorChannelUrl;
@@ -66,16 +75,10 @@ public class YoutubeCommentsResponse {
         private int likeCount;
         private String publishedAt;
         private String updatedAt;
-
-        // getters and setters
-        // ...
     }
 
     @Data
     public static class AuthorChannelId {
         private String value;
-
-        // getters and setters
-        // ...
     }
 }

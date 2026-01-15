@@ -63,8 +63,14 @@ public class UrlController {
             report.setPlatform(platform);
             report.setArchetype(analysisRequest.getArchetype());
             report.setTimestamp(LocalDateTime.now());
-            transcript.setTranscriptText(youtubeService.getTranscript(postId).getTranscript());;
-            report.setSummary(llmService.summarize(transcript.getTranscriptText(), analysisRequest.getArchetype(), analysisRequest.getCustomPrompt()));
+
+            String transcriptText = youtubeService.getTranscript(postId).getTranscript();
+            List<String> comments = youtubeService.getComments(postId);
+            String commentsText = String.join("\n", comments);
+            String combinedInput = transcriptText + "\n\nCOMMUNITY REACTIONS:\n" + commentsText;
+
+            transcript.setTranscriptText(transcriptText);
+            report.setSummary(llmService.summarize(combinedInput, analysisRequest.getArchetype(), analysisRequest.getCustomPrompt()));
             reportRepository.save(report);
             transcript.setReport(report);
             transcriptRepository.save(transcript);
