@@ -450,3 +450,46 @@ Continued implementing YouTube comments integration. Discovered the actual API s
 **When debugging complex stream chains, what's the systematic approach to verify what each operation (filter, map, flatMap) is doing to the data at each step?**
 
 **In nested object structures like YouTube's comment threads, why might you need to create multiple DTO classes even though they have similar field names (e.g., ThreadSnippet vs CommentSnippet)?**
+
+### Saturday Jan 17
+Completed YouTube comments integration sprint (Blocks 1-4). Removed Transcript entity entirely (YAGNI - not using it). Restructured Report to store contentSummary and communityReaction separately. Created AnalysisResult DTO for structured LLM responses. Refined prompts to capture sentiment/tone instead of dry summaries. Updated frontend with grid layout (main content + community sidebar). **VERY IMPORTANT DEEP DIVE NEEDED**: Successfully configured H2 console to work with Spring Boot 4.0 by using JakartaWebServlet instead of WebServlet due to Jakarta EE vs javax servlet API mismatch.
+
+**What is the YAGNI principle in software development, and how does it guide decisions about whether to keep or remove code/features?**
+
+**When you have a feature that "might be useful later" (like storing raw transcripts for potential re-summarization), what are the costs of keeping it vs removing it?**
+
+**If you're caching results by postId+archetype in the Report table, why might storing the original transcript in a separate Transcript table be redundant?**
+
+**When designing database schemas, what's the difference between "this data is needed for current functionality" vs "this data might be useful someday"? Which should drive schema decisions?**
+
+**When splitting a single field into multiple fields (e.g., summary → contentSummary + communityReaction), what database migration concerns exist for production systems with existing data?**
+
+**What is a Java record, and why is it useful for DTOs that simply hold data without behavior?**
+
+**When an LLM returns a single string response that contains multiple logical sections, what are the two main approaches to extract those sections programmatically?**
+
+**If you use a delimiter like "---COMMUNITY REACTION---" to split LLM responses, why must you handle the case where the LLM doesn't include the delimiter? What's a good fallback strategy?**
+
+**In prompt engineering, what's the difference between asking an LLM to "summarize the comments" vs "capture the TONE and SENTIMENT of the comments"? How does this affect output quality?**
+
+**When prompting an LLM for personality and emotion, what specific techniques make responses feel more human? (e.g., asking "Are people excited? Skeptical? What are they debating?")**
+
+**In CSS Grid, what does `grid-template-columns: 1fr 340px` mean, and how does the layout behave when the viewport is too narrow?**
+
+**When creating a two-column layout where one column is fixed-width (sidebar) and one is flexible (main content), why use CSS Grid instead of flexbox?**
+
+**In responsive design, when should a sidebar move from beside the main content to below it? What CSS property/media query pattern handles this?**
+
+**⭐ VERY IMPORTANT - DEEP DIVE NEEDED: What is the difference between javax.servlet and jakarta.servlet packages, and why did this change happen in modern Java EE?**
+
+**⭐ VERY IMPORTANT: Spring Boot 4.0 uses Jakarta EE. If an H2 dependency provides both WebServlet (javax.servlet) and JakartaWebServlet (jakarta.servlet), which one must you use and why?**
+
+**⭐ VERY IMPORTANT: What is ServletContextInitializer in Spring Boot, and how does it allow manual servlet registration when auto-configuration doesn't work?**
+
+**⭐ VERY IMPORTANT: When using ServletContextInitializer.onStartup(), what's the pattern for registering a servlet? (servletContext.addServlet, setLoadOnStartup, addMapping)**
+
+**If Spring Boot's auto-configuration for a feature (like H2 console) doesn't work due to version incompatibilities, what are your debugging/fixing options?**
+
+**When you see "Type parameter X is not within its bound; should implement Y", what does this error mean and how do you fix it?**
+
+**What's the difference between `scope=runtime` and `scope=compile` for Maven dependencies, and why might changing scope affect which classes are available at compile time vs runtime?**

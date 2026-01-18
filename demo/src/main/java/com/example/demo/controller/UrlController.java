@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AnalysisRequest;
+import com.example.demo.dto.AnalysisResult;
 import com.example.demo.entity.Report;
-import com.example.demo.entity.Transcript;
 import com.example.demo.repository.ReportRepository;
-import com.example.demo.repository.TranscriptRepository;
 import com.example.demo.service.*;
 import io.github.thoroldvix.api.TranscriptRetrievalException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,6 @@ public class UrlController {
 
     @Autowired
     private ReportRepository reportRepository;
-
-    @Autowired
-    private TranscriptRepository transcriptRepository;
 
     @Autowired
     private YoutubeService youtubeService;
@@ -56,7 +52,6 @@ public class UrlController {
         }
 
         Report report = new Report();
-        Transcript transcript = new Transcript();
 
         if (Objects.equals(platform, "YOUTUBE")) {
             report.setPostId(postId);
@@ -67,18 +62,19 @@ public class UrlController {
             String transcriptText = youtubeService.getTranscript(postId).getTranscript();
             List<String> comments = youtubeService.getComments(postId);
             String commentsText = String.join("\n", comments);
-            String combinedInput = transcriptText + "\n\nCOMMUNITY REACTIONS:\n" + commentsText;
 
-            transcript.setTranscriptText(transcriptText);
-            report.setSummary(llmService.summarize(combinedInput, analysisRequest.getArchetype(), analysisRequest.getCustomPrompt()));
+            AnalysisResult result = llmService.summarize(transcriptText, commentsText, analysisRequest.getArchetype(), analysisRequest.getCustomPrompt());
+            report.setContentSummary(result.contentSummary());
+            report.setCommunityReaction(result.communityReaction());
+
             reportRepository.save(report);
-            transcript.setReport(report);
-            transcriptRepository.save(transcript);
         } else if (Objects.equals(platform, "REDDIT")) {
             report.setPostId(postId);
             report.setPlatform(platform);
             report.setArchetype(analysisRequest.getArchetype());
-            report.setSummary(reportGenerator.generateRedditReport(redditService.getData()));
+            String redditSummary = reportGenerator.generateRedditReport(redditService.getData());
+            report.setContentSummary(redditSummary);
+            report.setCommunityReaction("N/A - Reddit analysis");
             report.setTimestamp(LocalDateTime.now());
             reportRepository.save(report);
         }

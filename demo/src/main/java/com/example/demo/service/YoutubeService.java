@@ -52,17 +52,19 @@ public class YoutubeService {
             return List.of();
         }
 
-        List<String> test = response.getItems().stream()
-                .flatMap(item -> item.getSnippet().getTopLevelComment().getSnippet().getTextOriginal()).toList();
+        // Get all top-level comments
+        var topLevelComments = response.getItems().stream()
+                .map(item -> item.getSnippet().getTopLevelComment().getSnippet().getTextOriginal());
 
-//        return response.getItems().stream()
-//                .filter(item -> item.getReplies() != null)
-//                .flatMap(item -> item.getReplies().getComments().stream())
-//                .map(comment -> comment.getSnippet().getTextOriginal())
-//                .toList();
+        // Get all reply comments
+        var replyComments = response.getItems().stream()
+                .filter(item -> item.getReplies() != null)
+                .flatMap(item -> item.getReplies().getComments().stream())
+                .map(comment -> comment.getSnippet().getTextOriginal());
 
-        return test;
-
+        // Combine both streams and return as list
+        return java.util.stream.Stream.concat(topLevelComments, replyComments)
+                .toList();
     }
 
 }

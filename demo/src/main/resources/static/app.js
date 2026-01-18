@@ -86,13 +86,54 @@ function populateResultCard(data, url, archetype, processingTime) {
     tag.textContent = archetype.replace('_', ' ');
     archetypesDiv.appendChild(tag);
 
-    // Populate content
+    // Populate content with grid layout
     const resultContent = resultDiv.querySelector('.result-content');
     resultContent.innerHTML = '';
 
-    // Clean up markdown and parse summary
-    const summary = (data.summary || '').replaceAll('**', '');
-    const lines = summary.split('\n');
+    // Create grid container
+    const contentGrid = document.createElement('div');
+    contentGrid.className = 'content-grid';
+
+    // Create main content section
+    const mainContent = document.createElement('div');
+    mainContent.className = 'main-content';
+
+    const mainTitle = document.createElement('h2');
+    mainTitle.textContent = 'Video Analysis';
+    mainContent.appendChild(mainTitle);
+
+    parseAndAppendContent(mainContent, data.contentSummary || '');
+
+    // Create community sidebar
+    const communitySidebar = document.createElement('div');
+    communitySidebar.className = 'community-sidebar';
+
+    const sidebarTitle = document.createElement('h2');
+    sidebarTitle.textContent = 'Community Reaction';
+    communitySidebar.appendChild(sidebarTitle);
+
+    const communityText = data.communityReaction || 'No community reaction available.';
+    const communityParagraphs = communityText.split('\n\n');
+    communityParagraphs.forEach(paragraph => {
+        const p = document.createElement('p');
+        p.textContent = paragraph.trim();
+        communitySidebar.appendChild(p);
+    });
+
+    // Append both sections to grid
+    contentGrid.appendChild(mainContent);
+    contentGrid.appendChild(communitySidebar);
+    resultContent.appendChild(contentGrid);
+
+    // Populate footer with processing time
+    const resultFooter = resultDiv.querySelector('.result-footer');
+    resultFooter.textContent = `Processed in ${processingTime} seconds`;
+}
+
+function parseAndAppendContent(container, text) {
+    // Clean up markdown
+    const cleanText = text.replaceAll('**', '');
+    const lines = cleanText.split('\n');
 
     let currentList = null;
 
@@ -102,7 +143,7 @@ function populateResultCard(data, url, archetype, processingTime) {
         if (!trimmedLine) {
             // Empty line - close any open list
             if (currentList) {
-                resultContent.appendChild(currentList);
+                container.appendChild(currentList);
                 currentList = null;
             }
             return;
@@ -123,23 +164,19 @@ function populateResultCard(data, url, archetype, processingTime) {
         } else {
             // Close any open list before adding paragraph
             if (currentList) {
-                resultContent.appendChild(currentList);
+                container.appendChild(currentList);
                 currentList = null;
             }
 
             // Regular paragraph
             const p = document.createElement('p');
             p.textContent = trimmedLine;
-            resultContent.appendChild(p);
+            container.appendChild(p);
         }
     });
 
     // Close any remaining open list
     if (currentList) {
-        resultContent.appendChild(currentList);
+        container.appendChild(currentList);
     }
-
-    // Populate footer with processing time
-    const resultFooter = resultDiv.querySelector('.result-footer');
-    resultFooter.textContent = `Processed in ${processingTime} seconds`;
 }

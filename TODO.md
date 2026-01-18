@@ -8,11 +8,14 @@
 
 **YouTube Comments Integration Sprint**
 
-- **Block 1: Design service architecture and data structures** - Decide where comments logic lives (YoutubeService vs separate service), what data structure to use for comments (raw JSON vs DTO vs simple strings), and how comments flow through the system
-- **Block 2: Implement YouTube Data API v3 comments fetching** - Create method to call commentThreads endpoint, handle API key from environment variables, fetch top 100 comments, parse response and extract items array
-- **Block 3: Integrate comments into LLM analysis** - Modify LlmService to accept both transcript and comments, update prompt to include community reaction analysis, handle token limits (transcript + 100 comments could be large)
-- **Block 4: Update UI to display Community Reaction section** - Add new section to results card, style it appropriately, handle cases where comments aren't available
+**Remaining:**
 - **Block 5: Error handling and edge cases** - Handle videos with comments disabled, API failures, rate limits, empty comment sections
+
+**Completed:**
+- ✓ Block 1: Design service architecture and data structures
+- ✓ Block 2: Implement YouTube Data API v3 comments fetching
+- ✓ Block 3: Integrate comments into LLM analysis
+- ✓ Block 4: Update UI to display Community Reaction section
 
 ## Backlog
 
@@ -25,6 +28,8 @@
 ---
 
 ## Session History
+
+**Saturday Jan 17 (50 minutes):** Completed YouTube Comments Integration Sprint Blocks 1-4. Fixed comment extraction stream logic using Stream.concat() to merge top-level and reply comments. Removed Transcript entity/repository (YAGNI principle). Restructured Report entity with contentSummary and communityReaction fields, created AnalysisResult DTO for structured LLM responses, updated prompts to capture sentiment/tone with personality, and implemented frontend grid layout with community sidebar. Debugged H2 console 404 issue and successfully configured it using JakartaWebServlet (Jakarta EE) instead of WebServlet (javax) for Spring Boot 4.0 compatibility via ServletContextInitializer. Only Block 5 (error handling) remains for the sprint.
 
 **Thursday Jan 16 (50 minutes):** Continued Block 2 implementation for YouTube comments fetching. Used Postman to inspect actual API response structure and discovered each CommentThread contains both a top-level comment (via snippet.topLevelComment) and optional replies. Redesigned YoutubeCommentsResponse DTO with separate ThreadSnippet and CommentSnippet classes to match nested structure. Wired getComments() into analyze endpoint and started implementing extraction logic but identified filter/map logic bug before completing - filtering for replies existence but extracting top-level comments, which excludes comments without replies. Next session: Fix stream logic to collect both top-level and reply comments correctly.
 

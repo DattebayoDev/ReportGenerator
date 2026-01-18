@@ -24,7 +24,10 @@ public class Report {
     private AnalysisArchetype archetype;
 
     @Column(columnDefinition = "TEXT")
-    private String summary;
+    private String contentSummary;
+
+    @Column(columnDefinition = "TEXT")
+    private String communityReaction;
 
     private LocalDateTime timestamp;
 
