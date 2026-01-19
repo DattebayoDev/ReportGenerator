@@ -493,3 +493,38 @@ Completed YouTube comments integration sprint (Blocks 1-4). Removed Transcript e
 **When you see "Type parameter X is not within its bound; should implement Y", what does this error mean and how do you fix it?**
 
 **What's the difference between `scope=runtime` and `scope=compile` for Maven dependencies, and why might changing scope affect which classes are available at compile time vs runtime?**
+
+### Saturday Jan 18
+Deep dive learning session on H2 console configuration mechanics (servlets, Jakarta EE, manual registration). Made frontend adjustments (wider card, removed video title header). Refined community reaction prompt to be shorter and punchier (4-6 sentences max). **Major architectural optimization:** Decoupled content summary from community reaction into separate LLM calls - content summary regenerates per archetype, community reaction generated once per video and reused across all archetypes (saves API costs and processing time).
+
+**What is a servlet in Java web applications, and what problem does it solve in handling HTTP requests?**
+
+**When a browser sends raw HTTP bytes to your server, what are the layers of processing before your controller method gets called? (Tomcat → DispatcherServlet → Controller)**
+
+**What is Tomcat's role in a Spring Boot application, and why is it called a "servlet container"?**
+
+**Spring's DispatcherServlet handles all your application endpoints (/analyze, /reports, etc.). If you need to add another servlet (like H2 console), how does Tomcat know which servlet handles which URL path?**
+
+**What does `addMapping("/h2-console/*")` do when registering a servlet, and how does the `/*` wildcard work?**
+
+**In servlet registration, what does `setLoadOnStartup(1)` control, and what's the difference between eager vs lazy servlet initialization?**
+
+**Why did Java EE rename all packages from `javax.*` to `jakarta.*`, and what compatibility problems does this create for libraries built before the change?**
+
+**If you're using Spring Boot 4.0 (which uses Jakarta EE) and try to use an old servlet class that implements `javax.servlet.Servlet`, what error will you get and why?**
+
+**What is ServletContextInitializer in Spring Boot, and why would you use it instead of relying on auto-configuration?**
+
+**When you call `servletContext.addServlet("name", servletInstance)`, what are you telling the servlet container to do?**
+
+**When designing a system with LLM API calls, how do you decide which outputs should be cached/reused vs regenerated on each request?**
+
+**If analyzing the same video with different archetypes (TLDR, KEY_POINTS, DEEP_DIVE), which parts of the analysis are archetype-dependent and which are archetype-independent?**
+
+**Why does it make sense to analyze comments once per video (regardless of archetype) but re-analyze the transcript for each archetype?**
+
+**When optimizing API costs for external services (like OpenAI), what's the pattern for separating "generate once, reuse many times" data from "generate every time" data?**
+
+**If you have a method that takes 5 parameters but only 2 of them actually affect the output, what refactoring would make the caching strategy clearer?**
+
+**In the controller, when checking if community reaction exists (`existingReport != null && existingReport.getCommunityReaction() != null`), why check both conditions instead of just one?**

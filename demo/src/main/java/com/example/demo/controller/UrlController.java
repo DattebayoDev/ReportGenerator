@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AnalysisRequest;
-import com.example.demo.dto.AnalysisResult;
 import com.example.demo.entity.Report;
 import com.example.demo.repository.ReportRepository;
 import com.example.demo.service.*;
@@ -60,12 +59,23 @@ public class UrlController {
             report.setTimestamp(LocalDateTime.now());
 
             String transcriptText = youtubeService.getTranscript(postId).getTranscript();
-            List<String> comments = youtubeService.getComments(postId);
-            String commentsText = String.join("\n", comments);
 
-            AnalysisResult result = llmService.summarize(transcriptText, commentsText, analysisRequest.getArchetype(), analysisRequest.getCustomPrompt());
-            report.setContentSummary(result.contentSummary());
-            report.setCommunityReaction(result.communityReaction());
+            // Always generate archetype-specific content summary
+            String contentSummary = llmService.summarizeContent(transcriptText, analysisRequest.getArchetype(), analysisRequest.getCustomPrompt());
+            report.setContentSummary(contentSummary);
+
+            // Check if community reaction already exists for this video (any archetype)
+            Report existingReport = reportRepository.findByPostId(postId);
+            if (existingReport != null && existingReport.getCommunityReaction() != null) {
+                // Reuse existing community reaction
+                report.setCommunityReaction(existingReport.getCommunityReaction());
+            } else {
+                // Generate new community reaction (first time analyzing this video)
+                List<String> comments = youtubeService.getComments(postId);
+                String commentsText = String.join("\n", comments);
+                String communityReaction = llmService.summarizeComments(commentsText);
+                report.setCommunityReaction(communityReaction);
+            }
 
             reportRepository.save(report);
         } else if (Objects.equals(platform, "REDDIT")) {

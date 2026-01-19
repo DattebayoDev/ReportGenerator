@@ -74,9 +74,9 @@ function populateResultCard(data, url, archetype, processingTime) {
     const resultUrl = resultDiv.querySelector('.result-url');
     resultUrl.textContent = url;
 
-    // Populate title (use video title if available, otherwise use generic title)
+    // Hide the title element
     const resultTitle = resultDiv.querySelector('.result-title');
-    resultTitle.textContent = data.title || 'Video Analysis';
+    resultTitle.style.display = 'none';
 
     // Populate archetype tags
     const archetypesDiv = resultDiv.querySelector('.archetypes');

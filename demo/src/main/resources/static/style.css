@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-    max-width: 720px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 24px;
 }
@@ -267,7 +267,7 @@ textarea:focus {
 
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 340px;
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
 }
 
