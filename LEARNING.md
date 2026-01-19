@@ -528,3 +528,26 @@ Deep dive learning session on H2 console configuration mechanics (servlets, Jaka
 **If you have a method that takes 5 parameters but only 2 of them actually affect the output, what refactoring would make the caching strategy clearer?**
 
 **In the controller, when checking if community reaction exists (`existingReport != null && existingReport.getCommunityReaction() != null`), why check both conditions instead of just one?**
+
+### Sunday Jan 19
+Investigated YouTube bot detection problem and deployment strategies. Researched how commercial transcript services bypass bot detection using residential proxies, browser automation, or OAuth. Used browser DevTools Network tab to reverse-engineer how a free transcript website works (discovered it proxies through backend, not client-side). Discussed cost analysis and trade-offs between different approaches (residential proxies ~$0.0012 per video vs Cloudflare Tunnel for personal use).
+
+**Why do cloud platforms like Railway, Heroku, and AWS get blocked by bot detection systems on websites like YouTube, while home internet connections typically don't?**
+
+**What is a residential proxy service, and how does it differ from data center proxies or free proxy lists in terms of bot detection evasion?**
+
+**When commercial scraping services charge per GB of bandwidth (e.g., $75/month for 5GB), what does this pricing model reveal about the infrastructure costs of maintaining residential proxy networks?**
+
+**In browser DevTools, which tab allows you to inspect HTTP requests made by a webpage, and what information can you extract to understand how a web service works under the hood?**
+
+**When reverse-engineering a web application, what's the difference between client-side fetching (JavaScript making requests directly from the browser) and server-side proxying (JavaScript calling your own backend, which then fetches from the target)?**
+
+**How can you determine if a website is using client-side or server-side fetching by examining the Network tab in DevTools?**
+
+**If a web service proxies requests through their backend server instead of making client-side API calls, what does this reveal about their likely strategy for bypassing bot detection or API restrictions?**
+
+**When evaluating deployment strategies for a web scraper, what are the key trade-offs between running on your local machine with a tunnel service vs deploying to the cloud with a residential proxy service?**
+
+**What is the business model behind free transcript/scraping services that don't charge users directly? What are the likely monetization strategies?**
+
+**When analyzing the cost-effectiveness of a paid service ($75/month) versus building your own solution, what hidden costs should you consider beyond just the subscription price?**
